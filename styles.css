@@ -3,13 +3,15 @@
 }
 
 .card {
-  text-aligh: center;
+  text-align: center;
   background: #dbdbdb;
+  position: absolute;
   top: 50%;
-  right: 50%
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card h1 {
-  text-weight: 20px;
-  font-color: #fff
+  font-weight: 20px;
+  color: #fff;
 }
