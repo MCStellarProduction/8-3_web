@@ -15,7 +15,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: background 0.3s ease;
+      animation: backgroundFade 2s ease-out forwards;
+    }
+
+    @keyframes backgroundFade {
+      0% {
+        background: linear-gradient(to bottom, #b6fbff, #83a4d4);
+      }
+      100% {
+        background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+      }
     }
 
     .login-container {
@@ -28,6 +37,8 @@
       text-align: center;
       animation: fadeIn 1s ease-out;
       transform: scale(0.95);
+      opacity: 0;
+      animation-delay: 0.3s;
       transition: transform 0.3s ease-out;
     }
 
@@ -40,8 +51,7 @@
       margin-bottom: 20px;
       color: #333;
       font-weight: 600;
-      opacity: 0;
-      animation: fadeInText 1s 0.2s forwards;
+      animation: fadeInText 1s 0.5s forwards;
     }
 
     .login-container p {
@@ -49,8 +59,7 @@
       color: #666;
       margin-bottom: 30px;
       font-weight: 300;
-      opacity: 0;
-      animation: fadeInText 1s 0.4s forwards;
+      animation: fadeInText 1s 0.7s forwards;
     }
 
     .input-field {
@@ -63,7 +72,7 @@
       transition: all 0.3s ease;
       box-sizing: border-box;
       opacity: 0;
-      animation: fadeInText 1s 0.6s forwards;
+      animation: fadeInText 1s 1s forwards;
     }
 
     .input-field:focus {
@@ -88,7 +97,7 @@
       font-weight: 600;
       transition: all 0.3s ease;
       opacity: 0;
-      animation: fadeInText 1s 0.8s forwards;
+      animation: fadeInText 1s 1.3s forwards;
     }
 
     .submit-btn:hover {
@@ -110,6 +119,18 @@
 
     .forgot-password:hover {
       text-decoration: underline;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+      font-weight: 600;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     @keyframes fadeIn {
@@ -151,7 +172,7 @@
       font-weight: 600;
     }
 
-    /* Animación del Check */
+    /* Animación de los puntos */
     .check-overlay {
       position: fixed;
       top: 0;
@@ -170,6 +191,16 @@
       animation: checkAnim 1s ease-out forwards;
     }
 
+    .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #5bbd5b;
+      margin: 0 5px;
+      opacity: 0;
+      transform: scale(0);
+    }
+
     @keyframes checkAnim {
       0% {
         opacity: 0;
@@ -178,6 +209,17 @@
       100% {
         opacity: 1;
         transform: scale(1);
+      }
+    }
+
+    @keyframes dotMove {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-30px);
+        opacity: 0.5;
       }
     }
   </style>
@@ -191,6 +233,7 @@
     <input class="input-field" type="password" id="password" placeholder="Contraseña" required>
     <button class="submit-btn" id="submit-btn">Ingresar</button>
     <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+    <div class="error-message" id="error-message">Por favor, complete todos los campos.</div>
   </div>
 
   <div class="loading-overlay" id="loading-overlay">
@@ -198,11 +241,13 @@
   </div>
 
   <div class="check-overlay" id="check-overlay">
-    ✔
+    <div class="dot" id="dot1"></div>
+    <div class="dot" id="dot2"></div>
+    <div class="dot" id="dot3"></div>
+    <div class="dot" id="dot4"></div>
   </div>
 
   <script>
-    // Definir las credenciales en formato "usuario;contraseña": "pagina_custom"
     const credentials = {
       "usuario1;contraseña1": "pagina_custom1.html",
       "usuario2;contraseña2": "pagina_custom2.html"
@@ -211,6 +256,14 @@
     document.getElementById('submit-btn').addEventListener('click', function() {
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
+
+      // Validación de campos vacíos
+      if (!username || !password) {
+        document.getElementById('error-message').style.opacity = '1';
+        return;
+      } else {
+        document.getElementById('error-message').style.opacity = '0';
+      }
 
       // Crear una clave de las credenciales
       const key = `${username};${password}`;
@@ -226,10 +279,17 @@
         // Mostrar la animación de check
         document.getElementById('check-overlay').style.display = 'flex';
 
+        // Animación de los puntos
+        document.getElementById('dot1').style.animation = 'dotMove 0.6s ease-in-out 0s infinite';
+        document.getElementById('dot2').style.animation = 'dotMove 0.6s ease-in-out 0.1s infinite';
+        document.getElementById('dot3').style.animation = 'dotMove 0.6s ease-in-out 0.2s infinite';
+        document.getElementById('dot4').style.animation = 'dotMove 0.6s ease-in-out 0.3s infinite';
+
         // Redirigir después de la animación
         setTimeout(function() {
           // Verificar si las credenciales son correctas
           if (credentials[key]) {
+            alert("¡Inicio de sesión exitoso!");
             window.location.href = credentials[key]; // Redirigir a la página correspondiente
           } else {
             alert('Credenciales incorrectas');
