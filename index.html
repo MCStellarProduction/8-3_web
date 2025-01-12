@@ -196,14 +196,24 @@
       }
     }
 
-    @keyframes dotMove {
+    /* Animación para la X */
+    .check-overlay.x .dot {
+      background-color: red;
+      animation: dotMoveX 0.6s ease-in-out infinite;
+    }
+
+    @keyframes dotMoveX {
       0%, 100% {
-        transform: translateY(0);
-        opacity: 1;
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(50px, 50px);
       }
       50% {
-        transform: translateY(-30px);
-        opacity: 0.5;
+        transform: translate(0, 100px);
+      }
+      75% {
+        transform: translate(-50px, 50px);
       }
     }
   </style>
@@ -263,25 +273,29 @@
         // Mostrar la animación de check
         document.getElementById('check-overlay').style.display = 'flex';
 
-        // Animación de los puntos
-        document.getElementById('dot1').style.animation = 'dotMove 0.6s ease-in-out 0s infinite';
-        document.getElementById('dot2').style.animation = 'dotMove 0.6s ease-in-out 0.1s infinite';
-        document.getElementById('dot3').style.animation = 'dotMove 0.6s ease-in-out 0.2s infinite';
-        document.getElementById('dot4').style.animation = 'dotMove 0.6s ease-in-out 0.3s infinite';
+        // Si las credenciales son correctas, mostrar los puntos verdes
+        if (credentials[key]) {
+          document.getElementById('check-overlay').classList.remove('x');
+          document.getElementById('check-overlay').style.backgroundColor = 'rgba(0, 128, 0, 0.5)';
+          document.getElementById('dot1').style.animation = 'dotMove 0.6s ease-in-out 0s infinite';
+          document.getElementById('dot2').style.animation = 'dotMove 0.6s ease-in-out 0.1s infinite';
+          document.getElementById('dot3').style.animation = 'dotMove 0.6s ease-in-out 0.2s infinite';
+          document.getElementById('dot4').style.animation = 'dotMove 0.6s ease-in-out 0.3s infinite';
 
-        // Redirigir después de la animación
-        setTimeout(function() {
-          // Verificar si las credenciales son correctas
-          if (credentials[key]) {
+          setTimeout(function() {
             alert("¡Inicio de sesión exitoso!");
             window.location.href = credentials[key]; // Redirigir a la página correspondiente
-          } else {
-            alert('Credenciales incorrectas');
-          }
+          }, 2000); // Después de 2 segundos
+        } else {
+          // Si las credenciales son incorrectas, mostrar la X roja
+          document.getElementById('check-overlay').classList.add('x');
+          document.getElementById('check-overlay').style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+        }
 
-          // Ocultar la animación de check
+        // Ocultar la animación de check después de 2 segundos
+        setTimeout(function() {
           document.getElementById('check-overlay').style.display = 'none';
-        }, 2000); // Después de 2 segundos de la animación
+        }, 2000);
       }, 2000); // Simulando tiempo de espera de 2 segundos
     });
   </script>
