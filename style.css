@@ -1,1 +1,15 @@
+.body {
+  background: linear-gradient(90deg, hsla(128, 100%, 72%, 1) 0%, hsla(181, 96%, 53%, 1) 100%);
+}
 
+.card {
+  text-aligh: center;
+  background: #dbdbdb;
+  top: 50%;
+  right: 50%
+}
+
+.card h1 {
+  text-weight: 20px;
+  font-color: #fff
+}
