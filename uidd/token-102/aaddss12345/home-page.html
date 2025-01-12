@@ -49,7 +49,8 @@
     }
 
     /* Secciones específicas para cada icono */
-    #menu, #notificaciones, #informacion, #calendario {
+    .content-section {
+      display: none; /* Inicialmente ocultar todas las secciones */
       padding: 50px;
       text-align: center;
       min-height: 100vh;
@@ -58,13 +59,26 @@
     /* Sección de notificaciones */
     #notificaciones {
       background-color: #e8f5e9;
-      padding-top: 100px; /* Espacio para el contenido */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
     }
 
+    #menu {
+      background-color: #f1f1f1;
+    }
+
+    #informacion {
+      background-color: #fff3e0;
+    }
+
+    #calendario {
+      background-color: #d1c4e9;
+    }
+
+    /* Estilos para los iconos de la barra de navegación */
+    .menu-icon, .notification-icon, .info-icon, .calendar-icon {
+      font-size: 24px;
+    }
+
+    /* Estilos para las notificaciones */
     .notification-card {
       background-color: white;
       border-radius: 10px;
@@ -104,12 +118,6 @@
       color: #666;
       font-size: 14px;
     }
-
-    /* Estilos para los iconos de la barra de navegación */
-    .menu-icon, .notification-icon, .info-icon, .calendar-icon {
-      font-size: 24px;
-    }
-
   </style>
 </head>
 <body>
@@ -117,20 +125,20 @@
   <!-- Barra de navegación -->
   <div class="navbar">
     <div class="nav-icons">
-      <a href="#menu"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
-      <a href="#notificaciones"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
-      <a href="#informacion"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
-      <a href="#calendario"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('menu')"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('notificaciones')"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('informacion')"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('calendario')"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
     </div>
   </div>
 
   <!-- Contenido principal -->
-  <div id="menu" class="content">
+  <div id="menu" class="content-section">
     <h1>Menú</h1>
     <p>Aquí va el contenido del Menú.</p>
   </div>
 
-  <div id="notificaciones" class="content">
+  <div id="notificaciones" class="content-section">
     <h1>Notificaciones</h1>
     <div class="notification-card" onclick="handleNotificationClick(this)">
       <i class="fas fa-bell notification-icon"></i>
@@ -157,12 +165,12 @@
     </div>
   </div>
 
-  <div id="informacion" class="content">
+  <div id="informacion" class="content-section">
     <h1>Información</h1>
     <p>Aquí va el contenido de Información.</p>
   </div>
 
-  <div id="calendario" class="content">
+  <div id="calendario" class="content-section">
     <h1>Calendario</h1>
     <p>Aquí va el contenido del Calendario.</p>
   </div>
@@ -170,15 +178,33 @@
   <script>
     // Función para manejar el clic en las notificaciones
     function handleNotificationClick(notificationElement) {
-      // Agregar el efecto de flotación con transform
       notificationElement.style.transform = "translateY(-10px)";
       notificationElement.style.transition = "transform 0.3s ease";
 
-      // Hacerlo volver a su posición original después de un pequeño delay
       setTimeout(function() {
         notificationElement.style.transform = "translateY(0)";
       }, 300);
     }
+
+    // Función para mostrar la sección correspondiente
+    function showSection(sectionId) {
+      // Primero, ocultamos todas las secciones
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Luego, mostramos solo la sección seleccionada
+      const sectionToShow = document.getElementById(sectionId);
+      if (sectionToShow) {
+        sectionToShow.style.display = 'block';
+      }
+    }
+
+    // Mostrar el menú por defecto al cargar la página
+    window.onload = function() {
+      showSection('menu');
+    };
   </script>
 
 </body>
