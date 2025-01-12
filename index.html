@@ -127,98 +127,35 @@
       text-decoration: underline;
     }
 
-    .error-message {
-      color: red;
-      font-size: 14px;
+    /* Mensaje de error o éxito */
+    .status-message {
+      color: #fff;
+      font-size: 16px;
       font-weight: 600;
       position: absolute;
       top: 10px;
       left: 50%;
       transform: translateX(-50%);
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: none;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
-    /* Pantalla de carga */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      color: white;
-      font-size: 24px;
-      font-weight: 600;
+    .success {
+      background-color: #4caf50;
     }
 
-    /* Animación de los puntos */
-    .check-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 128, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      color: white;
-      font-size: 48px;
-      font-weight: 600;
-      opacity: 0;
-      animation: checkAnim 1s ease-out forwards;
+    .error {
+      background-color: #f44336;
     }
 
-    .dot {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: #5bbd5b;
-      margin: 0 5px;
-      opacity: 0;
-      transform: scale(0);
-    }
-
-    @keyframes checkAnim {
-      0% {
-        opacity: 0;
-        transform: scale(0);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    /* Animación para la X */
-    .check-overlay.x .dot {
-      background-color: red;
-      animation: dotMoveX 0.6s ease-in-out infinite;
-    }
-
-    @keyframes dotMoveX {
-      0%, 100% {
-        transform: translate(0, 0);
-      }
-      25% {
-        transform: translate(50px, 50px);
-      }
-      50% {
-        transform: translate(0, 100px);
-      }
-      75% {
-        transform: translate(-50px, 50px);
-      }
-    }
   </style>
 </head>
 <body>
+
+  <div class="status-message" id="status-message"></div>
 
   <div class="login-container">
     <h1>Bienvenido</h1>
@@ -227,76 +164,56 @@
     <input class="input-field" type="password" id="password" placeholder="Contraseña" required>
     <button class="submit-btn" id="submit-btn">Ingresar</button>
     <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-    <div class="error-message" id="error-message">Por favor, complete todos los campos.</div>
-  </div>
-
-  <div class="loading-overlay" id="loading-overlay">
-    Cargando...
-  </div>
-
-  <div class="check-overlay" id="check-overlay">
-    <div class="dot" id="dot1"></div>
-    <div class="dot" id="dot2"></div>
-    <div class="dot" id="dot3"></div>
-    <div class="dot" id="dot4"></div>
   </div>
 
   <script>
+    // Datos de credenciales
     const credentials = {
       "usuario1;contraseña1": "pagina_custom1.html",
       "usuario2;contraseña2": "pagina_custom2.html"
     };
 
+    // Función para mostrar el mensaje de éxito o error
+    function showStatusMessage(message, type) {
+      const statusMessage = document.getElementById('status-message');
+      statusMessage.textContent = message;
+      statusMessage.className = `status-message ${type}`;
+      statusMessage.style.display = 'block';
+      statusMessage.style.opacity = '1';
+
+      setTimeout(function() {
+        statusMessage.style.opacity = '0';
+        setTimeout(function() {
+          statusMessage.style.display = 'none';
+        }, 300);
+      }, 3000);
+    }
+
+    // Evento para el botón de iniciar sesión
     document.getElementById('submit-btn').addEventListener('click', function() {
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
 
       // Validación de campos vacíos
       if (!username || !password) {
-        document.getElementById('error-message').style.opacity = '1';
+        showStatusMessage("Por favor, complete todos los campos.", "error");
         return;
-      } else {
-        document.getElementById('error-message').style.opacity = '0';
       }
 
-      // Crear una clave de las credenciales
+      // Crear la clave de las credenciales
       const key = `${username};${password}`;
 
-      // Mostrar la pantalla de carga
-      document.getElementById('loading-overlay').style.display = 'flex';
+      // Verificar las credenciales
+      if (credentials[key]) {
+        showStatusMessage("¡Inicio de sesión exitoso!", "success");
 
-      // Simular un tiempo de espera para la verificación de las credenciales
-      setTimeout(function() {
-        // Ocultar la pantalla de carga
-        document.getElementById('loading-overlay').style.display = 'none';
-
-        // Mostrar la animación de check
-        document.getElementById('check-overlay').style.display = 'flex';
-
-        // Si las credenciales son correctas, mostrar los puntos verdes
-        if (credentials[key]) {
-          document.getElementById('check-overlay').classList.remove('x');
-          document.getElementById('check-overlay').style.backgroundColor = 'rgba(0, 128, 0, 0.5)';
-          document.getElementById('dot1').style.animation = 'dotMove 0.6s ease-in-out 0s infinite';
-          document.getElementById('dot2').style.animation = 'dotMove 0.6s ease-in-out 0.1s infinite';
-          document.getElementById('dot3').style.animation = 'dotMove 0.6s ease-in-out 0.2s infinite';
-          document.getElementById('dot4').style.animation = 'dotMove 0.6s ease-in-out 0.3s infinite';
-
-          setTimeout(function() {
-            alert("¡Inicio de sesión exitoso!");
-            window.location.href = credentials[key]; // Redirigir a la página correspondiente
-          }, 2000); // Después de 2 segundos
-        } else {
-          // Si las credenciales son incorrectas, mostrar la X roja
-          document.getElementById('check-overlay').classList.add('x');
-          document.getElementById('check-overlay').style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
-        }
-
-        // Ocultar la animación de check después de 2 segundos
+        // Redirigir a la página correspondiente después de 2 segundos
         setTimeout(function() {
-          document.getElementById('check-overlay').style.display = 'none';
-        }, 2000);
-      }, 2000); // Simulando tiempo de espera de 2 segundos
+          window.location.href = credentials[key]; // Redirigir a la página correspondiente
+        }, 2000); // Esperar 2 segundos para mostrar el mensaje
+      } else {
+        showStatusMessage("Credenciales incorrectas, por favor intente de nuevo.", "error");
+      }
     });
   </script>
 
