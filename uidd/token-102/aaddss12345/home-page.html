@@ -31,6 +31,7 @@
       left: 0;
       width: 100%;
       z-index: 1000;
+      box-sizing: border-box;
     }
 
     .navbar .nav-icons {
@@ -56,11 +57,17 @@
       align-items: center;
       gap: 10px;
       color: white;
+      overflow: hidden; /* Evitar que la imagen se desborde */
+      white-space: nowrap; /* Evitar que el texto se parta */
     }
 
     .profile .username {
       font-size: 16px;
       font-weight: 600;
+      white-space: nowrap; /* Evitar que el nombre se divida en varias líneas */
+      text-overflow: ellipsis; /* Poner puntos suspensivos si el texto es muy largo */
+      overflow: hidden;
+      max-width: 150px; /* Limitar el espacio para el nombre */
     }
 
     .profile img {
@@ -68,6 +75,8 @@
       height: 40px;
       border-radius: 50%;
       object-fit: cover; /* Asegura que la imagen se recorte bien dentro del círculo */
+      max-width: 100%; /* Evitar que la imagen se desborde */
+      max-height: 100%; /* Evitar que la imagen se desborde */
     }
 
     /* Secciones específicas para cada icono */
