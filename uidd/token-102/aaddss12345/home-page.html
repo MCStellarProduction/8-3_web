@@ -18,12 +18,12 @@
       overflow-x: hidden;
     }
 
-    /* Estilos para la barra de navegación */
+    /* Barra de navegación */
     .navbar {
       background-color: #5bbd5b;
       padding: 15px 20px;
       display: flex;
-      justify-content: center; /* Centra los iconos */
+      justify-content: space-between; /* Distribuir el espacio entre los iconos y el perfil */
       align-items: center;
       position: fixed;
       top: 0;
@@ -35,8 +35,7 @@
     .navbar .nav-icons {
       display: flex;
       gap: 20px;
-      justify-content: center; /* Asegura que los iconos estén centrados */
-      width: 100%;
+      align-items: center; /* Alinea los iconos al centro verticalmente */
     }
 
     .navbar .nav-icons i {
@@ -48,6 +47,25 @@
 
     .navbar .nav-icons i:hover {
       transform: scale(1.1);
+    }
+
+    /* Perfil de usuario */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .profile .username {
+      font-size: 16px;
+      font-weight: 600;
     }
 
     /* Secciones específicas para cada icono */
@@ -121,11 +139,18 @@
 
   <!-- Barra de navegación -->
   <div class="navbar">
+    <!-- Iconos de navegación -->
     <div class="nav-icons">
       <a href="javascript:void(0)" onclick="showSection('menu')"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
       <a href="javascript:void(0)" onclick="showSection('notificaciones')"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
       <a href="javascript:void(0)" onclick="showSection('informacion')"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
       <a href="javascript:void(0)" onclick="showSection('calendario')"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
+    </div>
+
+    <!-- Foto de perfil y nombre -->
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="Foto de Perfil">
+      <span class="username">Juan Pérez</span>
     </div>
   </div>
 
