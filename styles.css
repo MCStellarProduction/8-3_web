@@ -6,7 +6,7 @@ body {
 
 .card {
   text-align: center;
-  background: #fff;
+  background: #ffffff;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,5 +17,5 @@ body {
 
 .card h1 {
   font-weight: 20px;
-  color: #d2d;
+  color: #d2d2d2;
 }
