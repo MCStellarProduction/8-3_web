@@ -1,5 +1,5 @@
 .body {
-  background: linear-gradient(90deg, hsla(128, 100%, 72%, 1) 0%, hsla(181, 96%, 53%, 1) 100%);
+  background-image: linear-gradient(to left bottom, #63ff6b, #5bff84, #58ff9a, #5bffad, #63ffbe);
 }
 
 .card {
