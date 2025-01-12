@@ -48,24 +48,6 @@
       transform: scale(1.1);
     }
 
-    /* Estilos para el contenido */
-    .content {
-      margin-top: 60px; /* Espacio para la barra de navegación */
-      padding: 20px;
-      text-align: center;
-    }
-
-    .content h1 {
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .content p {
-      font-size: 18px;
-      color: #666;
-    }
-
     /* Secciones específicas para cada icono */
     #menu, #notificaciones, #informacion, #calendario {
       padding: 50px;
@@ -73,20 +55,54 @@
       min-height: 100vh;
     }
 
-    #menu {
-      background-color: #f1f1f1;
-    }
-
+    /* Sección de notificaciones */
     #notificaciones {
       background-color: #e8f5e9;
+      padding-top: 100px; /* Espacio para el contenido */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
 
-    #informacion {
-      background-color: #fff3e0;
+    .notification-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    #calendario {
-      background-color: #d1c4e9;
+    .notification-card:hover {
+      transform: translateY(-5px); /* Flotación al pasar el mouse */
+    }
+
+    .notification-icon {
+      font-size: 30px;
+      margin-right: 15px;
+      color: #5bbd5b;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-content .title {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .notification-content .description {
+      color: #666;
+      font-size: 14px;
     }
 
     /* Estilos para los iconos de la barra de navegación */
@@ -116,7 +132,29 @@
 
   <div id="notificaciones" class="content">
     <h1>Notificaciones</h1>
-    <p>Aquí va el contenido de Notificaciones.</p>
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Nueva Actualización</div>
+        <div class="description">¡Tu aplicación ha sido actualizada a la última versión!</div>
+      </div>
+    </div>
+
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Recordatorio de Cita</div>
+        <div class="description">Tienes una cita programada para mañana a las 10:00 AM.</div>
+      </div>
+    </div>
+
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Nuevo Mensaje</div>
+        <div class="description">Tienes un mensaje nuevo de Juan Pérez.</div>
+      </div>
+    </div>
   </div>
 
   <div id="informacion" class="content">
@@ -130,7 +168,17 @@
   </div>
 
   <script>
-    // Aquí puedes agregar funcionalidades adicionales si lo necesitas
+    // Función para manejar el clic en las notificaciones
+    function handleNotificationClick(notificationElement) {
+      // Agregar el efecto de flotación con transform
+      notificationElement.style.transform = "translateY(-10px)";
+      notificationElement.style.transition = "transform 0.3s ease";
+
+      // Hacerlo volver a su posición original después de un pequeño delay
+      setTimeout(function() {
+        notificationElement.style.transform = "translateY(0)";
+      }, 300);
+    }
   </script>
 
 </body>
