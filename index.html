@@ -35,15 +35,21 @@
       width: 100%;
       max-width: 400px;
       text-align: center;
-      animation: fadeIn 1s ease-out;
-      transform: scale(0.95);
       opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      transform: scale(0.95);
       animation-delay: 0.3s;
-      transition: transform 0.3s ease-out;
     }
 
-    .login-container:hover {
-      transform: scale(1);
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .login-container h1 {
@@ -131,28 +137,6 @@
       transform: translateX(-50%);
       opacity: 0;
       transition: opacity 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInText {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Pantalla de carga */
