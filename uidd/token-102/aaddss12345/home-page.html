@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú con Barra de Navegación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- FontAwesome para iconos -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Estilos para la barra de navegación */
+    .navbar {
+      background-color: #5bbd5b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar .nav-icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-icons i {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .navbar .nav-icons i:hover {
+      transform: scale(1.1);
+    }
+
+    /* Estilos para el contenido */
+    .content {
+      margin-top: 60px; /* Espacio para la barra de navegación */
+      padding: 20px;
+      text-align: center;
+    }
+
+    .content h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* Secciones específicas para cada icono */
+    #menu, #notificaciones, #informacion, #calendario {
+      padding: 50px;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    #menu {
+      background-color: #f1f1f1;
+    }
+
+    #notificaciones {
+      background-color: #e8f5e9;
+    }
+
+    #informacion {
+      background-color: #fff3e0;
+    }
+
+    #calendario {
+      background-color: #d1c4e9;
+    }
+
+    /* Estilos para los iconos de la barra de navegación */
+    .menu-icon, .notification-icon, .info-icon, .calendar-icon {
+      font-size: 24px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <div class="navbar">
+    <div class="nav-icons">
+      <a href="#menu"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
+      <a href="https://www.ejemplo.com/notificaciones"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
+      <a href="#informacion"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
+      <a href="#calendario"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div id="menu" class="content">
+    <h1>Menú</h1>
+    <p>Aquí va el contenido del Menú.</p>
+  </div>
+
+  <div id="notificaciones" class="content">
+    <h1>Notificaciones</h1>
+    <p>Aquí va el contenido de las Notificaciones.</p>
+  </div>
+
+  <div id="informacion" class="content">
+    <h1>Información</h1>
+    <p>Aquí va el contenido de Información.</p>
+  </div>
+
+  <div id="calendario" class="content">
+    <h1>Calendario</h1>
+    <p>Aquí va el contenido del Calendario.</p>
+  </div>
+
+  <script>
+    // Aquí puedes agregar funcionalidades adicionales si lo necesitas
+  </script>
+
+</body>
+</html>
 
