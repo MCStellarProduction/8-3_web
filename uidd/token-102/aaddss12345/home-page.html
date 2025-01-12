@@ -15,7 +15,8 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
+      overflow: hidden; /* Deshabilitar el desplazamiento */
+      user-select: none; /* Deshabilitar selección de texto */
     }
 
     /* Barra de navegación */
@@ -66,6 +67,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
+      object-fit: cover; /* Asegura que la imagen se recorte bien dentro del círculo */
     }
 
     /* Secciones específicas para cada icono */
