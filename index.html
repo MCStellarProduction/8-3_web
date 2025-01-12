@@ -133,6 +133,53 @@
         transform: translateY(0);
       }
     }
+
+    /* Pantalla de carga */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    /* Animación del Check */
+    .check-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 128, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      color: white;
+      font-size: 48px;
+      font-weight: 600;
+      opacity: 0;
+      animation: checkAnim 1s ease-out forwards;
+    }
+
+    @keyframes checkAnim {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -140,11 +187,60 @@
   <div class="login-container">
     <h1>Bienvenido</h1>
     <p>Inicia sesión en tu cuenta</p>
-    <input class="input-field" type="text" placeholder="Usuario" required>
-    <input class="input-field" type="password" placeholder="Contraseña" required>
-    <button class="submit-btn">Ingresar</button>
+    <input class="input-field" type="text" id="username" placeholder="Usuario" required>
+    <input class="input-field" type="password" id="password" placeholder="Contraseña" required>
+    <button class="submit-btn" id="submit-btn">Ingresar</button>
     <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
   </div>
+
+  <div class="loading-overlay" id="loading-overlay">
+    Cargando...
+  </div>
+
+  <div class="check-overlay" id="check-overlay">
+    ✔
+  </div>
+
+  <script>
+    // Definir las credenciales en formato "usuario;contraseña": "pagina_custom"
+    const credentials = {
+      "usuario1;contraseña1": "pagina_custom1.html",
+      "usuario2;contraseña2": "pagina_custom2.html"
+    };
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Crear una clave de las credenciales
+      const key = `${username};${password}`;
+
+      // Mostrar la pantalla de carga
+      document.getElementById('loading-overlay').style.display = 'flex';
+
+      // Simular un tiempo de espera para la verificación de las credenciales
+      setTimeout(function() {
+        // Ocultar la pantalla de carga
+        document.getElementById('loading-overlay').style.display = 'none';
+
+        // Mostrar la animación de check
+        document.getElementById('check-overlay').style.display = 'flex';
+
+        // Redirigir después de la animación
+        setTimeout(function() {
+          // Verificar si las credenciales son correctas
+          if (credentials[key]) {
+            window.location.href = credentials[key]; // Redirigir a la página correspondiente
+          } else {
+            alert('Credenciales incorrectas');
+          }
+
+          // Ocultar la animación de check
+          document.getElementById('check-overlay').style.display = 'none';
+        }, 2000); // Después de 2 segundos de la animación
+      }, 2000); // Simulando tiempo de espera de 2 segundos
+    });
+  </script>
 
 </body>
 </html>
