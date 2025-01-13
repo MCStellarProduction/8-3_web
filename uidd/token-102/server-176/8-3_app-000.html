@@ -82,7 +82,7 @@
       min-height: 100vh;
     }
 
-    /* Secciones específicas para cada icono */
+    /* Sección de notificaciones */
     #notificaciones {
       background-color: #e8f5e9;
     }
@@ -97,6 +97,47 @@
 
     #calendario {
       background-color: #d1c4e9;
+    }
+
+    /* Estilos para las notificaciones */
+    .notification-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .notification-card:hover {
+      transform: translateY(-5px); /* Flotación al pasar el mouse */
+    }
+
+    .notification-icon {
+      font-size: 30px;
+      margin-right: 15px;
+      color: #5bbd5b;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-content .title {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .notification-content .description {
+      color: #666;
+      font-size: 14px;
     }
 
     .event-box {
@@ -124,11 +165,41 @@
       width: 100%;
     }
 
+    .event-box .no-event {
+      font-size: 18px;
+      color: #777;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%; /* Limita el ancho */
+      word-wrap: break-word;
+    }
+
+    .event-box .live-event {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 16px;
+      color: red;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+      z-index: 1;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     .event-card {
       display: flex;
-      flex-direction: column;
+      flex-direction: column; /* Cambié a columna para que se apilen */
       align-items: flex-start;
-      gap: 15px;
+      gap: 15px; /* Separación entre elementos */
       margin-top: 30px;
     }
 
@@ -157,13 +228,13 @@
       font-size: 18px;
       margin: 0;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 10px; /* Añadí margen */
     }
 
     .event-card .event-details p {
       font-size: 14px;
       color: #555;
-      margin-bottom: 10px;
+      margin-bottom: 10px; /* Añadí margen */
     }
 
     .event-card .event-details .time {
@@ -171,46 +242,12 @@
       color: #777;
     }
 
-    .notification-card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+    /* Bloquear desplazamiento horizontal en el menú */
+    body.menu-active {
+      overflow-x: hidden;
     }
 
-    .notification-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .notification-icon {
-      font-size: 30px;
-      margin-right: 15px;
-      color: #5bbd5b;
-    }
-
-    .notification-content {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .notification-content .title {
-      font-weight: bold;
-      color: #333;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .notification-content .description {
-      color: #666;
-      font-size: 14px;
-    }
-
+    /* Estilo para agregar el # junto al título */
     .section-title {
       font-size: 24px;
       font-weight: 600;
@@ -297,27 +334,29 @@
     }
 
     function loadEvents() {
-      fetch('eventos.json')
-        .then(response => response.json())
+      fetch('/eventos.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se pudo cargar eventos.json');
+          }
+          return response.json();
+        })
         .then(data => {
           const eventsContainer = document.getElementById('events-container');
           const noEvent = document.getElementById('no-event');
           const liveEvent = document.getElementById('live-event');
           let anyEventActive = false;
 
-          // Limpiar contenedor antes de agregar nuevos eventos
           eventsContainer.innerHTML = '';
 
           data.eventos.forEach(event => {
-            // Crear la tarjeta de evento solo si está activo
             if (event.activo) {
               anyEventActive = true;
 
-              // Crear y mostrar el evento en vivo
               const eventCard = document.createElement('div');
               eventCard.classList.add('event-card');
               eventCard.id = event.id;
-              
+
               const dot = document.createElement('div');
               dot.classList.add('dot');
 
@@ -325,14 +364,14 @@
               eventDetails.classList.add('event-details');
 
               const eventTitle = document.createElement('h4');
-              eventTitle.textContent = event.nombre;  // Asignar el nombre del evento
+              eventTitle.textContent = event.nombre;
 
               const eventDescription = document.createElement('p');
-              eventDescription.textContent = event.descripcion;  // Asignar la descripción del evento
+              eventDescription.textContent = event.descripcion;
 
               const eventTime = document.createElement('p');
               eventTime.classList.add('time');
-              eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;  // Asignar hora del evento
+              eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;
 
               eventDetails.appendChild(eventTitle);
               eventDetails.appendChild(eventDescription);
@@ -345,7 +384,6 @@
             }
           });
 
-          // Si hay algún evento activo, mostramos el "En Vivo" y ocultamos el mensaje de "No hay eventos activos"
           if (anyEventActive) {
             noEvent.style.display = 'none';
             liveEvent.style.display = 'block';
@@ -358,12 +396,16 @@
     }
 
     function loadNotifications() {
-      fetch('notificaciones.json')
-        .then(response => response.json())
+      fetch('/notificaciones.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se pudo cargar notificaciones.json');
+          }
+          return response.json();
+        })
         .then(data => {
           const notificationsContainer = document.getElementById('notifications-container');
           
-          // Limpiar contenedor antes de agregar nuevas notificaciones
           notificationsContainer.innerHTML = '';
 
           data.notificaciones.forEach(notification => {
@@ -400,8 +442,8 @@
 
     window.onload = function() {
       showSection('menu');
-      loadEvents();  // Cargar los eventos dinámicamente al cargar la página
-      loadNotifications();  // Cargar las notificaciones dinámicamente al cargar la página
+      loadEvents();
+      loadNotifications();
     };
   </script>
 
