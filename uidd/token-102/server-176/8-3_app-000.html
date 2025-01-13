@@ -94,6 +94,8 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .event-box h2 {
@@ -116,6 +118,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 80%; /* Limita el ancho */
+      word-wrap: break-word;
     }
 
     .event-box .live-event {
@@ -138,9 +142,10 @@
 
     .event-card {
       display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
+      flex-direction: column; /* Cambié a columna para que se apilen */
+      align-items: flex-start;
+      gap: 15px; /* Separación entre elementos */
+      margin-top: 30px;
     }
 
     .event-card .dot {
@@ -159,17 +164,22 @@
 
     .event-card .event-details {
       text-align: left;
+      margin-left: 10px;
+      padding-left: 15px;
+      width: 100%;
     }
 
     .event-card .event-details h4 {
       font-size: 18px;
       margin: 0;
       font-weight: 600;
+      margin-bottom: 10px; /* Añadí margen */
     }
 
     .event-card .event-details p {
       font-size: 14px;
       color: #555;
+      margin-bottom: 10px; /* Añadí margen */
     }
 
     .event-card .event-details .time {
@@ -275,12 +285,13 @@
       const sectionToShow = document.getElementById(sectionId);
       if (sectionToShow) {
         sectionToShow.style.display = 'block';
-        // Bloquear desplazamiento horizontal solo cuando se esté en el menú
-        if (sectionId === 'menu') {
-          document.body.classList.add('menu-active');
-        } else {
-          document.body.classList.remove('menu-active');
-        }
+      }
+
+      // Activa/desactiva la clase para bloquear desplazamiento horizontal
+      if (sectionId === 'menu') {
+        document.body.classList.add('menu-active');
+      } else {
+        document.body.classList.remove('menu-active');
       }
     }
 
@@ -290,7 +301,7 @@
         startHour: 19,
         startMinute: 0,
         endHour: 19,
-        endMinute: 53
+        endMinute: 55
       },
       {
         id: 'morning-event-card',
