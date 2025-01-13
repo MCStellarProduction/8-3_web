@@ -3,10 +3,10 @@
     {
       "id": "live-event-card",
       "nombre": "Test Card",
-      "descripcion": " Description Test",
+      "descripcion": "Description Test",
       "hora_inicio": "19:00",
       "hora_fin": "20:15",
-      "activo": true
+      "activo": false
     },
     {
       "id": "morning-event-card",
