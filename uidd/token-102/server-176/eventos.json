@@ -5,8 +5,8 @@
       "nombre": "Evento en Vivo 1",
       "descripcion": "Descripción del evento 1",
       "hora_inicio": "10:00 AM",
-      "hora_fin": "2:00 PM",
-      "activo": false
+      "hora_fin": "1:00 PM",
+      "activo": true
     },
     {
       "id": "2",
