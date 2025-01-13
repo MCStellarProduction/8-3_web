@@ -296,6 +296,9 @@
           const liveEvent = document.getElementById('live-event');
           let anyEventActive = false;
 
+          // Limpiar contenedor antes de agregar nuevos eventos
+          eventsContainer.innerHTML = '';
+
           data.eventos.forEach(event => {
             const eventCard = document.createElement('div');
             eventCard.classList.add('event-card');
@@ -349,6 +352,9 @@
         .then(data => {
           const notificationsContainer = document.getElementById('notifications-container');
           
+          // Limpiar contenedor antes de agregar nuevas notificaciones
+          notificationsContainer.innerHTML = '';
+
           data.notificaciones.forEach(notification => {
             const notificationCard = document.createElement('div');
             notificationCard.classList.add('notification-card');
