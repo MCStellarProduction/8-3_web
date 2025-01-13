@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - No Name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- FontAwesome para iconos -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* Deshabilitar el desplazamiento */
+      user-select: none; /* Deshabilitar selección de texto */
+    }
+
+    /* Barra de navegación */
+    .navbar {
+      background-color: #5bbd5b;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between; /* Distribuir el espacio entre los iconos y el perfil */
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+
+    .navbar .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center; /* Alinea los iconos al centro verticalmente */
+    }
+
+    .navbar .nav-icons i {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .navbar .nav-icons i:hover {
+      transform: scale(1.1);
+    }
+
+    /* Perfil de usuario */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      overflow: hidden; /* Evitar que la imagen se desborde */
+      white-space: nowrap; /* Evitar que el texto se parta */
+    }
+
+    .profile .username {
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap; /* Evitar que el nombre se divida en varias líneas */
+      text-overflow: ellipsis; /* Poner puntos suspensivos si el texto es muy largo */
+      overflow: hidden;
+      max-width: 150px; /* Limitar el espacio para el nombre */
+    }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover; /* Asegura que la imagen se recorte bien dentro del círculo */
+      max-width: 100%; /* Evitar que la imagen se desborde */
+      max-height: 100%; /* Evitar que la imagen se desborde */
+    }
+
+    /* Secciones específicas para cada icono */
+    .content-section {
+      display: none; /* Inicialmente ocultar todas las secciones */
+      padding: 50px;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    /* Sección de notificaciones */
+    #notificaciones {
+      background-color: #e8f5e9;
+    }
+
+    #menu {
+      background-color: #f1f1f1;
+    }
+
+    #informacion {
+      background-color: #fff3e0;
+    }
+
+    #calendario {
+      background-color: #d1c4e9;
+    }
+
+    /* Estilos para las notificaciones */
+    .notification-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .notification-card:hover {
+      transform: translateY(-5px); /* Flotación al pasar el mouse */
+    }
+
+    .notification-icon {
+      font-size: 30px;
+      margin-right: 15px;
+      color: #5bbd5b;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-content .title {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .notification-content .description {
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <div class="navbar">
+    <!-- Iconos de navegación -->
+    <div class="nav-icons">
+      <a href="javascript:void(0)" onclick="showSection('menu')"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('notificaciones')"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('informacion')"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
+      <a href="javascript:void(0)" onclick="showSection('calendario')"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
+    </div>
+
+    <!-- Foto de perfil y nombre -->
+    <div class="profile">
+      <span class="username">No Name</span>
+      <img src="https://via.placeholder.com/40" alt="Foto de Perfil">
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div id="menu" class="content-section">
+    <h1>Menú</h1>
+    <p>Aquí va el contenido del Menú.</p>
+  </div>
+
+  <div id="notificaciones" class="content-section">
+    <h1>Notificaciones</h1>
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Servicio Stellar</div>
+        <div class="description">El 8-3 App esta siendo manejado por MCStellar Production</div>
+      </div>
+    </div>
+
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Example</div>
+        <div class="description">Example Messaje</div>
+      </div>
+    </div>
+
+    <div class="notification-card" onclick="handleNotificationClick(this)">
+      <i class="fas fa-bell notification-icon"></i>
+      <div class="notification-content">
+        <div class="title">Nuevo Mensaje</div>
+        <div class="description">Tienes un mensaje nuevo de Testeovs12387</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="informacion" class="content-section">
+    <h1>Informacion de Clase</h1>
+    <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
+    <br>
+    <h2>Creador de la Pagina</h2>
+    <p>Luis Andres Zamora Aguilar</p>
+    <h2>Seccion</h2>
+    <p>8-3</p>
+    <h2>Profesor Guia</h2>
+    <p>No Definido</p>
+    <h2>Colegio</h2>
+    <p>Liceo Ing Samuel Saenz Flores</p>
+  </div>
+
+  <div id="calendario" class="content-section">
+    <h1>Calendario</h1>
+    <p>Aquí va el contenido del Calendario.</p>
+  </div>
+
+  <script>
+    // Función para manejar el clic en las notificaciones
+    function handleNotificationClick(notificationElement) {
+      notificationElement.style.transform = "translateY(-10px)";
+      notificationElement.style.transition = "transform 0.3s ease";
+
+      setTimeout(function() {
+        notificationElement.style.transform = "translateY(0)";
+      }, 300);
+    }
+
+    // Función para mostrar la sección correspondiente
+    function showSection(sectionId) {
+      // Primero, ocultamos todas las secciones
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Luego, mostramos solo la sección seleccionada
+      const sectionToShow = document.getElementById(sectionId);
+      if (sectionToShow) {
+        sectionToShow.style.display = 'block';
+      }
+    }
+
+    // Mostrar el menú por defecto al cargar la página
+    window.onload = function() {
+      showSection('menu');
+    };
+  </script>
+
+</body>
+</html>
