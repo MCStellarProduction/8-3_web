@@ -111,7 +111,7 @@
     /* Estilos para eventos */
     .event-box {
       width: 100%;
-      height: 300px;
+      height: auto;
       position: relative;
       background-color: white;
       border-radius: 20px;
@@ -211,11 +211,35 @@
       color: #777;
     }
 
+    /* Estilos para el cuadro de noticias */
+    #noticia-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #noticia-container .event-card {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #noticia-container .event-details h4 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #noticia-container .event-details p {
+      font-size: 16px;
+      color: #555;
+    }
+
     /* Bloquear desplazamiento horizontal en el menú */
     body.menu-active {
       overflow-x: hidden;
     }
-
   </style>
 </head>
 <body>
@@ -239,8 +263,13 @@
       <h2>Eventos</h2>
       <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
       <div class="live-event" id="live-event">En Vivo</div>
-
       <div id="events-container"></div>
+    </div>
+
+    <div class="event-box">
+      <h2>Última Noticia</h2>
+      <div class="no-event" id="no-noticia">No hay ninguna noticia disponible...</div>
+      <div id="noticia-container"></div>
     </div>
   </div>
 
@@ -277,7 +306,7 @@
     }
 
     function loadEvents() {
-      fetch('eventos.json')  // Aquí cambiamos la URL a la ubicación correcta del archivo JSON
+      fetch('eventos.json')  // URL del archivo JSON con los eventos
         .then(response => {
           if (!response.ok) {
             throw new Error('No se pudo cargar eventos.json');
@@ -338,9 +367,68 @@
         .catch(error => console.error('Error al cargar los eventos:', error));
     }
 
+    function loadNews() {
+      fetch('noticias.json')  // URL del archivo JSON con las noticias
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se pudo cargar noticias.json');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const noticiaContainer = document.getElementById('noticia-container');
+          const noNoticia = document.getElementById('no-noticia');
+          let anyNoticia = false;
+
+          noticiaContainer.innerHTML = '';
+
+          if (data.noticia) {
+            anyNoticia = true;
+
+            const noticiaCard = document.createElement('div');
+            noticiaCard.classList.add('event-card');
+
+            const noticiaDetails = document.createElement('div');
+            noticiaDetails.classList.add('event-details');
+
+            const noticiaTitle = document.createElement('h4');
+            noticiaTitle.textContent = data.noticia.titulo;
+
+            const noticiaDescription = document.createElement('p');
+            noticiaDescription.textContent = data.noticia.descripcion;
+
+            const noticiaTime = document.createElement('p');
+            noticiaTime.classList.add('time');
+            noticiaTime.textContent = `Fecha: ${data.noticia.fecha}`;
+
+            // Insertar párrafos de descripción
+            data.noticia.descripcion_parrafos.forEach(parrafo => {
+              const paragraph = document.createElement('p');
+              paragraph.textContent = parrafo;
+              noticiaDescription.appendChild(paragraph);
+            });
+
+            noticiaDetails.appendChild(noticiaTitle);
+            noticiaDetails.appendChild(noticiaDescription);
+            noticiaDetails.appendChild(noticiaTime);
+
+            noticiaCard.appendChild(noticiaDetails);
+            noticiaContainer.appendChild(noticiaCard);
+          }
+
+          if (anyNoticia) {
+            noNoticia.style.display = 'none';
+          } else {
+            noNoticia.style.display = 'block';
+          }
+        })
+        .catch(error => console.error('Error al cargar las noticias:', error));
+    }
+
     window.onload = function() {
       showSection('menu');
       loadEvents();
+      loadNews();  // Cargar noticias
     };
   </script>
 
