@@ -85,17 +85,18 @@
       background-color: #f1f1f1;
     }
 
+    /* Ajustando el diseño de la caja de eventos para que sea consistente */
     .event-box {
       width: 100%;
-      height: 300px;
-      position: relative;
       background-color: white;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
       padding: 20px;
       box-sizing: border-box;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .event-box h2 {
@@ -103,10 +104,6 @@
       font-size: 24px;
       font-weight: 600;
       margin-bottom: 20px;
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 100%;
     }
 
@@ -118,7 +115,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%; /* Limita el ancho */
+      width: 80%;
       word-wrap: break-word;
     }
 
@@ -142,9 +139,9 @@
 
     .event-card {
       display: flex;
-      flex-direction: column; /* Cambié a columna para que se apilen */
+      flex-direction: column;
       align-items: flex-start;
-      gap: 15px; /* Separación entre elementos */
+      gap: 15px;
       margin-top: 30px;
     }
 
@@ -173,18 +170,41 @@
       font-size: 18px;
       margin: 0;
       font-weight: 600;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details p {
       font-size: 14px;
       color: #555;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details .time {
       font-size: 12px;
       color: #777;
+    }
+
+    /* Diseño similar al de otras secciones (Notificaciones, Información, Calendario) */
+    .content-section h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    .notification-card, .info-card, .calendar-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .notification-card i, .info-card i, .calendar-card i {
+      font-size: 30px;
+      color: #5bbd5b;
     }
 
     /* Bloquear desplazamiento horizontal en el menú */
@@ -248,22 +268,30 @@
   </div>
 
   <div id="informacion" class="content-section">
-    <h1>Informacion de Clase</h1>
-    <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
-    <br>
-    <h3>Creador de la Pagina</h3>
-    <h5>Luis Andres Zamora Aguilar</h5>
-    <h3>Seccion</h3>
-    <h5>8-3</h5>
-    <h3>Profesor Guia</h3>
-    <h5>No Definido</h5>
-    <h3>Colegio</h3>
-    <h5>Liceo Ing Samuel Saenz Flores</h5>
+    <h1>Información de Clase</h1>
+    <div class="info-card">
+      <i class="fas fa-info-circle"></i>
+      <div class="info-content">
+        <h3>Creador de la Página</h3>
+        <p>Luis Andres Zamora Aguilar</p>
+        <h3>Sección</h3>
+        <p>8-3</p>
+        <h3>Profesor Guía</h3>
+        <p>No Definido</p>
+        <h3>Colegio</h3>
+        <p>Liceo Ing Samuel Saenz Flores</p>
+      </div>
+    </div>
   </div>
 
   <div id="calendario" class="content-section">
     <h1>Calendario</h1>
-    <p>Aquí va el contenido del Calendario.</p>
+    <div class="calendar-card">
+      <i class="fas fa-calendar-alt"></i>
+      <div class="calendar-content">
+        <p>Aquí va el contenido del Calendario.</p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -301,7 +329,7 @@
         startHour: 19,
         startMinute: 0,
         endHour: 19,
-        endMinute: 55
+        endMinute: 42
       },
       {
         id: 'morning-event-card',
