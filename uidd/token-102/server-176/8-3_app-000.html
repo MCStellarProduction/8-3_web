@@ -81,15 +81,7 @@
       text-align: center;
       min-height: 100vh;
     }
-        /* Secciones específicas para cada icono */
-    .content-section {
-      display: none; /* Inicialmente ocultar todas las secciones */
-      padding: 50px;
-      text-align: center;
-      min-height: 100vh;
-    }
 
-    /* Sección de notificaciones */
     #notificaciones {
       background-color: #e8f5e9;
     }
@@ -104,47 +96,6 @@
 
     #calendario {
       background-color: #d1c4e9;
-    }
-
-    /* Estilos para las notificaciones */
-    .notification-card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .notification-card:hover {
-      transform: translateY(-5px); /* Flotación al pasar el mouse */
-    }
-
-    .notification-icon {
-      font-size: 30px;
-      margin-right: 15px;
-      color: #5bbd5b;
-    }
-
-    .notification-content {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .notification-content .title {
-      font-weight: bold;
-      color: #333;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .notification-content .description {
-      color: #666;
-      font-size: 14px;
     }
 
     .event-box {
@@ -180,7 +131,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%; /* Limita el ancho */
+      width: 80%;
       word-wrap: break-word;
     }
 
@@ -204,9 +155,9 @@
 
     .event-card {
       display: flex;
-      flex-direction: column; /* Cambié a columna para que se apilen */
+      flex-direction: column;
       align-items: flex-start;
-      gap: 15px; /* Separación entre elementos */
+      gap: 15px;
       margin-top: 30px;
     }
 
@@ -235,13 +186,13 @@
       font-size: 18px;
       margin: 0;
       font-weight: 600;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details p {
       font-size: 14px;
       color: #555;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details .time {
@@ -249,12 +200,10 @@
       color: #777;
     }
 
-    /* Bloquear desplazamiento horizontal en el menú */
     body.menu-active {
       overflow-x: hidden;
     }
 
-    /* Estilo para agregar el # junto al título */
     .section-title {
       font-size: 24px;
       font-weight: 600;
@@ -290,23 +239,8 @@
       <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
       <div class="live-event" id="live-event">En Vivo</div>
 
-      <div class="event-card" id="live-event-card" style="display: none;">
-        <div class="dot"></div>
-        <div class="event-details">
-          <h4>Test Event</h4>
-          <p>Only Test Event</p>
-          <p class="time">De 7:00 pm a 8:15 pm</p>
-        </div>
-      </div>
-
-      <div class="event-card" id="morning-event-card" style="display: none;">
-        <div class="dot"></div>
-        <div class="event-details">
-          <h4>Evento Mañanero (04:50 AM - 14:20 PM)</h4>
-          <p>Descripción del evento de la mañana.</p>
-          <p class="time">De 04:50 AM a 14:20 PM</p>
-        </div>
-      </div>
+      <!-- Los eventos se agregarán aquí dinámicamente -->
+      <div id="events-container"></div>
     </div>
   </div>
 
@@ -360,66 +294,67 @@
       if (sectionToShow) {
         sectionToShow.style.display = 'block';
       }
-
-      // Activa/desactiva la clase para bloquear desplazamiento horizontal
-      if (sectionId === 'menu') {
-        document.body.classList.add('menu-active');
-      } else {
-        document.body.classList.remove('menu-active');
-      }
     }
 
-    const events = [
-      {
-        id: 'live-event-card',
-        startHour: 19,
-        startMinute: 0,
-        endHour: 20,
-        endMinute: 15
-      },
-      {
-        id: 'morning-event-card',
-        startHour: 4,
-        startMinute: 50,
-        endHour: 14,
-        endMinute: 20
-      }
-    ];
+    function loadEvents() {
+      fetch('eventos.json')
+        .then(response => response.json())
+        .then(data => {
+          const eventsContainer = document.getElementById('events-container');
+          const noEvent = document.getElementById('no-event');
+          const liveEvent = document.getElementById('live-event');
+          let anyEventActive = false;
 
-    function checkLiveEvent() {
-      const currentTime = new Date();
-      const currentHour = currentTime.getHours();
-      const currentMinute = currentTime.getMinutes();
-      const noEvent = document.getElementById('no-event');
-      const liveEvent = document.getElementById('live-event');
-      let anyEventActive = false;
+          data.eventos.forEach(event => {
+            const eventCard = document.createElement('div');
+            eventCard.classList.add('event-card');
+            eventCard.id = event.id;
+            eventCard.style.display = event.activo ? 'flex' : 'none';
 
-      events.forEach(event => {
-        const { startHour, startMinute, endHour, endMinute, id } = event;
-        const startTime = startHour * 60 + startMinute;
-        const endTime = endHour * 60 + endMinute;
-        const currentTimeInMinutes = currentHour * 60 + currentMinute;
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
 
-        if (currentTimeInMinutes >= startTime && currentTimeInMinutes < endTime) {
-          document.getElementById(id).style.display = 'flex';
-          anyEventActive = true;
-        } else {
-          document.getElementById(id).style.display = 'none';
-        }
-      });
+            const eventDetails = document.createElement('div');
+            eventDetails.classList.add('event-details');
 
-      if (anyEventActive) {
-        noEvent.style.display = 'none';
-        liveEvent.style.display = 'block';
-      } else {
-        noEvent.style.display = 'block';
-        liveEvent.style.display = 'none';
-      }
+            const eventTitle = document.createElement('h4');
+            eventTitle.textContent = event.nombre;
+
+            const eventDescription = document.createElement('p');
+            eventDescription.textContent = event.descripcion;
+
+            const eventTime = document.createElement('p');
+            eventTime.classList.add('time');
+            eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;
+
+            eventDetails.appendChild(eventTitle);
+            eventDetails.appendChild(eventDescription);
+            eventDetails.appendChild(eventTime);
+
+            eventCard.appendChild(dot);
+            eventCard.appendChild(eventDetails);
+
+            eventsContainer.appendChild(eventCard);
+
+            if (event.activo) {
+              anyEventActive = true;
+            }
+          });
+
+          if (anyEventActive) {
+            noEvent.style.display = 'none';
+            liveEvent.style.display = 'block';
+          } else {
+            noEvent.style.display = 'block';
+            liveEvent.style.display = 'none';
+          }
+        })
+        .catch(error => console.error('Error al cargar los eventos:', error));
     }
 
     window.onload = function() {
       showSection('menu');
-      checkLiveEvent(); // Verificar los eventos en vivo al cargar la página
+      loadEvents(); // Cargar los eventos dinámicamente al cargar la página
     };
   </script>
 
