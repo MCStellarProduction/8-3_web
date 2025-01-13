@@ -4,17 +4,9 @@
       "id": "live-event-card",
       "nombre": "Test Card",
       "descripcion": "Description Test",
-      "hora_inicio": "19:00",
-      "hora_fin": "23:55",
+      "hora_inicio": "7:30",
+      "hora_fin": "0:20",
       "activo": true
-    },
-    {
-      "id": "morning-event-card",
-      "nombre": "Evento Mañanero",
-      "descripcion": "Evento temprano para comenzar el día",
-      "hora_inicio": "04:50",
-      "hora_fin": "14:20",
-      "activo": false
     }
   ]
 }
