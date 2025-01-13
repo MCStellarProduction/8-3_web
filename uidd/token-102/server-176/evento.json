@@ -2,10 +2,10 @@
   "eventos": [
     {
       "id": "1",
-      "nombre": "Evento en Testeo",
-      "descripcion": "Descripción del evento 1",
+      "nombre": "Test Event",
+      "descripcion": "MCStellar Server: En Mantenimiento",
       "hora_inicio": "10:00 AM",
-      "hora_fin": "1:00 PM",
+      "hora_fin": "2:05 PM",
       "activo": true
     },
     {
