@@ -1,12 +1,20 @@
 {
   "eventos": [
     {
-      "id": "live-event-card",
-      "nombre": "Test Card",
-      "descripcion": "Description Test",
-      "hora_inicio": "13:30",
-      "hora_fin": "0:20",
+      "id": "1",
+      "nombre": "Evento en Vivo 1",
+      "descripcion": "Descripción del evento 1",
+      "hora_inicio": "10:00 AM",
+      "hora_fin": "2:00 PM",
       "activo": true
+    },
+    {
+      "id": "2",
+      "nombre": "Evento en Vivo 2",
+      "descripcion": "Descripción del evento 2",
+      "hora_inicio": "1:00 PM",
+      "hora_fin": "3:00 PM",
+      "activo": false
     }
   ]
 }
