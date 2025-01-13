@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio - No Name</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- FontAwesome para iconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -24,7 +24,7 @@
       background-color: #5bbd5b;
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between; /* Distribuir el espacio entre los iconos y el perfil */
+      justify-content: space-between;
       align-items: center;
       position: fixed;
       top: 0;
@@ -37,7 +37,7 @@
     .navbar .nav-icons {
       display: flex;
       gap: 20px;
-      align-items: center; /* Alinea los iconos al centro verticalmente */
+      align-items: center;
     }
 
     .navbar .nav-icons i {
@@ -57,43 +57,41 @@
       align-items: center;
       gap: 10px;
       color: white;
-      overflow: hidden; /* Evitar que la imagen se desborde */
-      white-space: nowrap; /* Evitar que el texto se parta */
+      overflow: hidden;
     }
 
     .profile .username {
       font-size: 16px;
       font-weight: 600;
-      white-space: nowrap; /* Evitar que el nombre se divida en varias líneas */
-      text-overflow: ellipsis; /* Poner puntos suspensivos si el texto es muy largo */
+      white-space: nowrap;
+      text-overflow: ellipsis;
       overflow: hidden;
-      max-width: 150px; /* Limitar el espacio para el nombre */
+      max-width: 150px;
     }
 
     .profile img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      object-fit: cover; /* Asegura que la imagen se recorte bien dentro del círculo */
-      max-width: 100%; /* Evitar que la imagen se desborde */
-      max-height: 100%; /* Evitar que la imagen se desborde */
+      object-fit: cover;
     }
 
-    /* Secciones específicas para cada icono */
+    /* Secciones específicas */
     .content-section {
-      display: none; /* Inicialmente ocultar todas las secciones */
+      display: none;
       padding: 50px;
       text-align: center;
       min-height: 100vh;
     }
 
+    /* Sección de menú */
+    #menu {
+      background-color: #f1f1f1;
+    }
+
     /* Sección de notificaciones */
     #notificaciones {
       background-color: #e8f5e9;
-    }
-
-    #menu {
-      background-color: #f1f1f1;
     }
 
     #informacion {
@@ -104,45 +102,85 @@
       background-color: #d1c4e9;
     }
 
-    /* Estilos para las notificaciones */
-    .notification-card {
+    /* Estilos para el cuadro de eventos */
+    .event-box {
+      width: 100%;
+      height: 450px;
       background-color: white;
-      border-radius: 10px;
+      border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .event-box h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .event-box .no-event {
+      font-size: 18px;
+      color: #777;
+    }
+
+    .event-box .live-event {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 16px;
+      color: red;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .event-card {
       display: flex;
       align-items: center;
-      padding: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    .notification-card:hover {
-      transform: translateY(-5px); /* Flotación al pasar el mouse */
+    .event-card .dot {
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      border-radius: 50%;
+      animation: dot-blink 1.5s infinite;
     }
 
-    .notification-icon {
-      font-size: 30px;
-      margin-right: 15px;
-      color: #5bbd5b;
+    @keyframes dot-blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    .notification-content {
-      display: flex;
-      flex-direction: column;
+    .event-card .event-details {
+      text-align: left;
     }
 
-    .notification-content .title {
-      font-weight: bold;
-      color: #333;
-      font-size: 16px;
-      margin-bottom: 5px;
+    .event-card .event-details h4 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 600;
     }
 
-    .notification-content .description {
-      color: #666;
+    .event-card .event-details p {
       font-size: 14px;
+      color: #555;
+    }
+
+    .event-card .event-details .time {
+      font-size: 12px;
+      color: #777;
     }
   </style>
 </head>
@@ -168,7 +206,21 @@
   <!-- Contenido principal -->
   <div id="menu" class="content-section">
     <h1>Menú</h1>
-    <p>Aquí va el contenido del Menú.</p>
+    <div class="event-box">
+      <h2>Eventos</h2>
+      <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
+
+      <div class="live-event" id="live-event">En Vivo</div>
+
+      <div class="event-card" id="live-event-card" style="display: none;">
+        <div class="dot"></div>
+        <div class="event-details">
+          <h4>Evento de Ejemplo</h4>
+          <p>Descripción del evento de ejemplo.</p>
+          <p class="time">De 00:00 AM a 04:00 AM</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="notificaciones" class="content-section">
@@ -178,22 +230,6 @@
       <div class="notification-content">
         <div class="title">Servicio Stellar</div>
         <div class="description">El 8-3 App esta siendo manejado por MCStellar Production</div>
-      </div>
-    </div>
-
-    <div class="notification-card" onclick="handleNotificationClick(this)">
-      <i class="fas fa-bell notification-icon"></i>
-      <div class="notification-content">
-        <div class="title">Example</div>
-        <div class="description">Example Messaje</div>
-      </div>
-    </div>
-
-    <div class="notification-card" onclick="handleNotificationClick(this)">
-      <i class="fas fa-bell notification-icon"></i>
-      <div class="notification-content">
-        <div class="title">Nuevo Mensaje</div>
-        <div class="description">Tienes un mensaje nuevo de Testeovs12387</div>
       </div>
     </div>
   </div>
@@ -230,22 +266,40 @@
 
     // Función para mostrar la sección correspondiente
     function showSection(sectionId) {
-      // Primero, ocultamos todas las secciones
       const sections = document.querySelectorAll('.content-section');
       sections.forEach(section => {
         section.style.display = 'none';
       });
 
-      // Luego, mostramos solo la sección seleccionada
       const sectionToShow = document.getElementById(sectionId);
       if (sectionToShow) {
         sectionToShow.style.display = 'block';
       }
     }
 
-    // Mostrar el menú por defecto al cargar la página
+    // Función para manejar el evento en vivo
+    function checkLiveEvent() {
+      const currentTime = new Date();
+      const currentHour = currentTime.getHours();
+
+      const noEvent = document.getElementById('no-event');
+      const liveEvent = document.getElementById('live-event');
+      const liveEventCard = document.getElementById('live-event-card');
+
+      if (currentHour >= 0 && currentHour < 4) {
+        noEvent.style.display = 'none';
+        liveEvent.style.display = 'block';
+        liveEventCard.style.display = 'flex'; // Mostrar el evento en vivo
+      } else {
+        noEvent.style.display = 'block';
+        liveEvent.style.display = 'none';
+        liveEventCard.style.display = 'none'; // Ocultar el evento en vivo
+      }
+    }
+
     window.onload = function() {
       showSection('menu');
+      checkLiveEvent(); // Verificar el estado del evento en vivo al cargar la página
     };
   </script>
 
