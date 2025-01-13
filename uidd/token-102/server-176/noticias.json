@@ -4,10 +4,7 @@
     "descripcion": "Esta noticia es una prueba",
     "descripcion_parrafos": [
       "Primer párrafo de la noticia...",
-      "Segundo párrafo de la noticia...",
-      "Tercer párrafo de la noticia...",
-      "Cuarto párrafo de la noticia...",
-      "Quinto párrafo de la noticia..."
+      "Segundo párrafo de la noticia..."
     ],
     "fecha": "13 de enero de 2025"
   }
