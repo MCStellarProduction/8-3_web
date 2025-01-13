@@ -82,17 +82,7 @@
       min-height: 100vh;
     }
 
-    .content-section .section-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .content-section .section-title::after {
-      content: " #";
-      color: #888;
-    }
-
+    /* Secciones específicas para cada icono */
     #notificaciones {
       background-color: #e8f5e9;
     }
@@ -109,47 +99,6 @@
       background-color: #d1c4e9;
     }
 
-    .notification-card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      margin-bottom: 10px;
-    }
-
-    .notification-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .notification-icon {
-      font-size: 30px;
-      margin-right: 15px;
-      color: #5bbd5b;
-    }
-
-    .notification-content {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .notification-content .title {
-      font-weight: bold;
-      color: #333;
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .notification-content .description {
-      color: #666;
-      font-size: 14px;
-    }
-
     .event-box {
       width: 100%;
       height: 300px;
@@ -161,6 +110,18 @@
       flex-direction: column;
       padding: 20px;
       box-sizing: border-box;
+    }
+
+    .event-box h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
     }
 
     .event-card {
@@ -210,8 +171,55 @@
       color: #777;
     }
 
-    body.menu-active {
-      overflow-x: hidden;
+    .notification-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .notification-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .notification-icon {
+      font-size: 30px;
+      margin-right: 15px;
+      color: #5bbd5b;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-content .title {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .notification-content .description {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .section-title::after {
+      content: " #";
+      color: #888;
     }
   </style>
 </head>
@@ -237,6 +245,7 @@
       <h2>Eventos</h2>
       <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
       <div class="live-event" id="live-event">En Vivo</div>
+
       <div id="events-container"></div>
     </div>
   </div>
@@ -247,14 +256,14 @@
   </div>
 
   <div id="informacion" class="content-section">
-    <h1 class="section-title">Información de Clase</h1>
-    <p>Aquí se verá la información de la clase y créditos de la página.</p>
+    <h1 class="section-title">Informacion de Clase</h1>
+    <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
     <br>
-    <h3>Creador de la Página</h3>
-    <h5>Luis Andrés Zamora Aguilar</h5>
-    <h3>Sección</h3>
+    <h3>Creador de la Pagina</h3>
+    <h5>Luis Andres Zamora Aguilar</h5>
+    <h3>Seccion</h3>
     <h5>8-3</h5>
-    <h3>Profesor Guía</h3>
+    <h3>Profesor Guia</h3>
     <h5>No Definido</h5>
     <h3>Colegio</h3>
     <h5>Liceo Ing Samuel Saenz Flores</h5>
@@ -300,41 +309,43 @@
           eventsContainer.innerHTML = '';
 
           data.eventos.forEach(event => {
-            const eventCard = document.createElement('div');
-            eventCard.classList.add('event-card');
-            eventCard.id = event.id;
-            eventCard.style.display = event.activo ? 'flex' : 'none';
-
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-
-            const eventDetails = document.createElement('div');
-            eventDetails.classList.add('event-details');
-
-            const eventTitle = document.createElement('h4');
-            eventTitle.textContent = event.nombre;
-
-            const eventDescription = document.createElement('p');
-            eventDescription.textContent = event.descripcion;
-
-            const eventTime = document.createElement('p');
-            eventTime.classList.add('time');
-            eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;
-
-            eventDetails.appendChild(eventTitle);
-            eventDetails.appendChild(eventDescription);
-            eventDetails.appendChild(eventTime);
-
-            eventCard.appendChild(dot);
-            eventCard.appendChild(eventDetails);
-
-            eventsContainer.appendChild(eventCard);
-
+            // Crear la tarjeta de evento solo si está activo
             if (event.activo) {
               anyEventActive = true;
+
+              // Crear y mostrar el evento en vivo
+              const eventCard = document.createElement('div');
+              eventCard.classList.add('event-card');
+              eventCard.id = event.id;
+              
+              const dot = document.createElement('div');
+              dot.classList.add('dot');
+
+              const eventDetails = document.createElement('div');
+              eventDetails.classList.add('event-details');
+
+              const eventTitle = document.createElement('h4');
+              eventTitle.textContent = event.nombre;  // Asignar el nombre del evento
+
+              const eventDescription = document.createElement('p');
+              eventDescription.textContent = event.descripcion;  // Asignar la descripción del evento
+
+              const eventTime = document.createElement('p');
+              eventTime.classList.add('time');
+              eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;  // Asignar hora del evento
+
+              eventDetails.appendChild(eventTitle);
+              eventDetails.appendChild(eventDescription);
+              eventDetails.appendChild(eventTime);
+
+              eventCard.appendChild(dot);
+              eventCard.appendChild(eventDetails);
+
+              eventsContainer.appendChild(eventCard);
             }
           });
 
+          // Si hay algún evento activo, mostramos el "En Vivo" y ocultamos el mensaje de "No hay eventos activos"
           if (anyEventActive) {
             noEvent.style.display = 'none';
             liveEvent.style.display = 'block';
@@ -389,8 +400,8 @@
 
     window.onload = function() {
       showSection('menu');
-      loadEvents(); // Cargar los eventos dinámicamente al cargar la página
-      loadNotifications(); // Cargar las notificaciones dinámicamente al cargar la página
+      loadEvents();  // Cargar los eventos dinámicamente al cargar la página
+      loadNotifications();  // Cargar las notificaciones dinámicamente al cargar la página
     };
   </script>
 
