@@ -1,0 +1,22 @@
+{
+  "notificaciones": [
+    {
+      "id": "not1",
+      "titulo": "Servicio Stellar",
+      "descripcion": "El 8-3 App está siendo manejado por MCStellar Production",
+      "icono": "fas fa-bell"
+    },
+    {
+      "id": "not2",
+      "titulo": "Mantenimiento Programado",
+      "descripcion": "El servicio se interrumpirá el 15 de enero para mantenimiento.",
+      "icono": "fas fa-cogs"
+    },
+    {
+      "id": "not3",
+      "titulo": "Nueva Función",
+      "descripcion": "Se ha implementado una nueva función de notificación en la plataforma.",
+      "icono": "fas fa-info-circle"
+    }
+  ]
+}
