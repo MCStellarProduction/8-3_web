@@ -85,6 +85,18 @@
       background-color: #f1f1f1;
     }
 
+    #notificaciones {
+      background-color: #f4ffd4;
+    }
+
+    #informacion {
+      background-color: #ffecd4;
+    }
+
+    #calendario {
+      background-color: #d4fbff;
+    }
+
     .event-box {
       width: 100%;
       height: 300px;
@@ -191,6 +203,18 @@
     body.menu-active {
       overflow-x: hidden;
     }
+
+    /* Estilo para agregar el # junto al título */
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .section-title::after {
+      content: " #";
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -237,7 +261,7 @@
   </div>
 
   <div id="notificaciones" class="content-section">
-    <h1>Notificaciones</h1>
+    <h1 class="section-title">Notificaciones</h1>
     <div class="notification-card" onclick="handleNotificationClick(this)">
       <i class="fas fa-bell notification-icon"></i>
       <div class="notification-content">
@@ -248,7 +272,7 @@
   </div>
 
   <div id="informacion" class="content-section">
-    <h1>Informacion de Clase</h1>
+    <h1 class="section-title">Informacion de Clase</h1>
     <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
     <br>
     <h3>Creador de la Pagina</h3>
@@ -262,7 +286,7 @@
   </div>
 
   <div id="calendario" class="content-section">
-    <h1>Calendario</h1>
+    <h1 class="section-title">Calendario</h1>
     <p>Aquí va el contenido del Calendario.</p>
   </div>
 
