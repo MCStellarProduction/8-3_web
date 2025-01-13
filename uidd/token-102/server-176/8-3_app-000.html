@@ -82,6 +82,17 @@
       min-height: 100vh;
     }
 
+    .content-section .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .content-section .section-title::after {
+      content: " #";
+      color: #888;
+    }
+
     #notificaciones {
       background-color: #e8f5e9;
     }
@@ -98,6 +109,47 @@
       background-color: #d1c4e9;
     }
 
+    .notification-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .notification-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .notification-icon {
+      font-size: 30px;
+      margin-right: 15px;
+      color: #5bbd5b;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notification-content .title {
+      font-weight: bold;
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .notification-content .description {
+      color: #666;
+      font-size: 14px;
+    }
+
     .event-box {
       width: 100%;
       height: 300px;
@@ -109,48 +161,6 @@
       flex-direction: column;
       padding: 20px;
       box-sizing: border-box;
-    }
-
-    .event-box h2 {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-    }
-
-    .event-box .no-event {
-      font-size: 18px;
-      color: #777;
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      word-wrap: break-word;
-    }
-
-    .event-box .live-event {
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 16px;
-      color: red;
-      font-weight: bold;
-      animation: blink 1.5s infinite;
-      z-index: 1;
-    }
-
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
     }
 
     .event-card {
@@ -203,17 +213,6 @@
     body.menu-active {
       overflow-x: hidden;
     }
-
-    .section-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .section-title::after {
-      content: " #";
-      color: #888;
-    }
   </style>
 </head>
 <body>
@@ -238,32 +237,24 @@
       <h2>Eventos</h2>
       <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
       <div class="live-event" id="live-event">En Vivo</div>
-
-      <!-- Los eventos se agregarán aquí dinámicamente -->
       <div id="events-container"></div>
     </div>
   </div>
 
   <div id="notificaciones" class="content-section">
     <h1 class="section-title">Notificaciones</h1>
-    <div class="notification-card" onclick="handleNotificationClick(this)">
-      <i class="fas fa-bell notification-icon"></i>
-      <div class="notification-content">
-        <div class="title">Servicio Stellar</div>
-        <div class="description">El 8-3 App esta siendo manejado por MCStellar Production</div>
-      </div>
-    </div>
+    <div id="notifications-container"></div>
   </div>
 
   <div id="informacion" class="content-section">
-    <h1 class="section-title">Informacion de Clase</h1>
-    <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
+    <h1 class="section-title">Información de Clase</h1>
+    <p>Aquí se verá la información de la clase y créditos de la página.</p>
     <br>
-    <h3>Creador de la Pagina</h3>
-    <h5>Luis Andres Zamora Aguilar</h5>
-    <h3>Seccion</h3>
+    <h3>Creador de la Página</h3>
+    <h5>Luis Andrés Zamora Aguilar</h5>
+    <h3>Sección</h3>
     <h5>8-3</h5>
-    <h3>Profesor Guia</h3>
+    <h3>Profesor Guía</h3>
     <h5>No Definido</h5>
     <h3>Colegio</h3>
     <h5>Liceo Ing Samuel Saenz Flores</h5>
@@ -352,9 +343,48 @@
         .catch(error => console.error('Error al cargar los eventos:', error));
     }
 
+    function loadNotifications() {
+      fetch('notificaciones.json')
+        .then(response => response.json())
+        .then(data => {
+          const notificationsContainer = document.getElementById('notifications-container');
+          
+          data.notificaciones.forEach(notification => {
+            const notificationCard = document.createElement('div');
+            notificationCard.classList.add('notification-card');
+            notificationCard.id = notification.id;
+            notificationCard.onclick = () => handleNotificationClick(notificationCard);
+
+            const icon = document.createElement('i');
+            icon.classList.add(notification.icono, 'notification-icon');
+
+            const content = document.createElement('div');
+            content.classList.add('notification-content');
+
+            const title = document.createElement('div');
+            title.classList.add('title');
+            title.textContent = notification.titulo;
+
+            const description = document.createElement('div');
+            description.classList.add('description');
+            description.textContent = notification.descripcion;
+
+            content.appendChild(title);
+            content.appendChild(description);
+
+            notificationCard.appendChild(icon);
+            notificationCard.appendChild(content);
+
+            notificationsContainer.appendChild(notificationCard);
+          });
+        })
+        .catch(error => console.error('Error al cargar las notificaciones:', error));
+    }
+
     window.onload = function() {
       showSection('menu');
       loadEvents(); // Cargar los eventos dinámicamente al cargar la página
+      loadNotifications(); // Cargar las notificaciones dinámicamente al cargar la página
     };
   </script>
 
