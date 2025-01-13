@@ -396,49 +396,61 @@
     }
 
     function loadNotifications() {
-      fetch('/notificaciones.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo cargar notificaciones.json');
-          }
-          return response.json();
-        })
-        .then(data => {
-          const notificationsContainer = document.getElementById('notifications-container');
-          
-          notificationsContainer.innerHTML = '';
-
-          data.notificaciones.forEach(notification => {
-            const notificationCard = document.createElement('div');
-            notificationCard.classList.add('notification-card');
-            notificationCard.id = notification.id;
-            notificationCard.onclick = () => handleNotificationClick(notificationCard);
-
-            const icon = document.createElement('i');
-            icon.classList.add(notification.icono, 'notification-icon');
-
-            const content = document.createElement('div');
-            content.classList.add('notification-content');
-
-            const title = document.createElement('div');
-            title.classList.add('title');
-            title.textContent = notification.titulo;
-
-            const description = document.createElement('div');
-            description.classList.add('description');
-            description.textContent = notification.descripcion;
-
-            content.appendChild(title);
-            content.appendChild(description);
-
-            notificationCard.appendChild(icon);
-            notificationCard.appendChild(content);
-
-            notificationsContainer.appendChild(notificationCard);
-          });
-        })
-        .catch(error => console.error('Error al cargar las notificaciones:', error));
+  // Notificaciones de ejemplo
+  const notifications = [
+    {
+      id: 1,
+      icono: 'fas fa-bell',
+      titulo: 'Notificación 1',
+      descripcion: 'Este es un mensaje de notificación de ejemplo.'
+    },
+    {
+      id: 2,
+      icono: 'fas fa-info-circle',
+      titulo: 'Notificación 2',
+      descripcion: 'Otra notificación para mostrar cómo funciona.'
+    },
+    {
+      id: 3,
+      icono: 'fas fa-exclamation-circle',
+      titulo: 'Notificación 3',
+      descripcion: 'Una notificación de advertencia que necesita atención.'
     }
+  ];
+
+  const notificationsContainer = document.getElementById('notifications-container');
+  notificationsContainer.innerHTML = ''; // Limpiar contenedor
+
+  // Crear y agregar cada tarjeta de notificación
+  notifications.forEach(notification => {
+    const notificationCard = document.createElement('div');
+    notificationCard.classList.add('notification-card');
+    notificationCard.id = notification.id;
+    notificationCard.onclick = () => handleNotificationClick(notificationCard);
+
+    const icon = document.createElement('i');
+    icon.classList.add(notification.icono, 'notification-icon');
+
+    const content = document.createElement('div');
+    content.classList.add('notification-content');
+
+    const title = document.createElement('div');
+    title.classList.add('title');
+    title.textContent = notification.titulo;
+
+    const description = document.createElement('div');
+    description.classList.add('description');
+    description.textContent = notification.descripcion;
+
+    content.appendChild(title);
+    content.appendChild(description);
+
+    notificationCard.appendChild(icon);
+    notificationCard.appendChild(content);
+
+    notificationsContainer.appendChild(notificationCard);
+  });
+}
 
     window.onload = function() {
       showSection('menu');
