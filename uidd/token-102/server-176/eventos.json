@@ -4,7 +4,7 @@
       "id": "live-event-card",
       "nombre": "Test Card",
       "descripcion": "Description Test",
-      "hora_inicio": "7:30",
+      "hora_inicio": "13:30",
       "hora_fin": "0:20",
       "activo": true
     }
