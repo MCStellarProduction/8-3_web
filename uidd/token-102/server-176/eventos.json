@@ -6,7 +6,7 @@
       "descripcion": "Descripción del evento 1",
       "hora_inicio": "10:00 AM",
       "hora_fin": "2:00 PM",
-      "activo": true
+      "activo": false
     },
     {
       "id": "2",
