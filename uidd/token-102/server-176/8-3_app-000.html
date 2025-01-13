@@ -286,7 +286,7 @@
       const liveEvent = document.getElementById('live-event');
       const liveEventCard = document.getElementById('live-event-card');
 
-      if (currentHour >= 0 && currentHour < 4) {
+      if (currentHour >= 19 && currentHour < 22) {
         noEvent.style.display = 'none';
         liveEvent.style.display = 'block';
         liveEventCard.style.display = 'flex'; // Mostrar el evento en vivo
