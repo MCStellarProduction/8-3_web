@@ -15,11 +15,10 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden; /* Deshabilitar el desplazamiento */
-      user-select: none; /* Deshabilitar selección de texto */
+      overflow: hidden;
+      user-select: none;
     }
 
-    /* Barra de navegación */
     .navbar {
       background-color: #5bbd5b;
       padding: 15px 20px;
@@ -51,7 +50,6 @@
       transform: scale(1.1);
     }
 
-    /* Perfil de usuario */
     .profile {
       display: flex;
       align-items: center;
@@ -76,7 +74,6 @@
       object-fit: cover;
     }
 
-    /* Secciones específicas */
     .content-section {
       display: none;
       padding: 50px;
@@ -84,32 +81,20 @@
       min-height: 100vh;
     }
 
-    /* Sección de menú */
     #menu {
       background-color: #f1f1f1;
     }
 
-    /* Sección de notificaciones */
-    #notificaciones {
-      background-color: #e8f5e9;
-    }
-
-    #informacion {
-      background-color: #fff3e0;
-    }
-
-    #calendario {
-      background-color: #d1c4e9;
-    }
-
-    /* Estilos para el cuadro de eventos con relación 16:9 */
     .event-box {
       width: 100%;
-      padding-top: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
       position: relative;
       background-color: white;
       border-radius: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
     }
 
     .event-box h2 {
@@ -117,13 +102,19 @@
       font-size: 24px;
       font-weight: 600;
       margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
     }
 
     .event-box .no-event {
       font-size: 18px;
       color: #777;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 50%;
+      transform: translateY(-50%);
     }
 
     .event-box .live-event {
@@ -188,9 +179,7 @@
 </head>
 <body>
 
-  <!-- Barra de navegación -->
   <div class="navbar">
-    <!-- Iconos de navegación -->
     <div class="nav-icons">
       <a href="javascript:void(0)" onclick="showSection('menu')"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
       <a href="javascript:void(0)" onclick="showSection('notificaciones')"><i class="fas fa-bell notification-icon" title="Notificaciones"></i></a>
@@ -198,23 +187,19 @@
       <a href="javascript:void(0)" onclick="showSection('calendario')"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
     </div>
 
-    <!-- Foto de perfil y nombre -->
     <div class="profile">
       <span class="username">No Name</span>
       <img src="https://via.placeholder.com/40" alt="Foto de Perfil">
     </div>
   </div>
 
-  <!-- Contenido principal -->
   <div id="menu" class="content-section">
     <h1>Menú</h1>
     <div class="event-box">
       <h2>Eventos</h2>
       <div class="no-event" id="no-event">No hay ningún evento en vivo...</div>
-
       <div class="live-event" id="live-event">En Vivo</div>
 
-      <!-- Ejemplo de evento -->
       <div class="event-card" id="live-event-card" style="display: none;">
         <div class="dot"></div>
         <div class="event-details">
@@ -224,7 +209,6 @@
         </div>
       </div>
 
-      <!-- Nuevo evento (04:50 AM - 14:20 PM) -->
       <div class="event-card" id="morning-event-card" style="display: none;">
         <div class="dot"></div>
         <div class="event-details">
@@ -267,7 +251,6 @@
   </div>
 
   <script>
-    // Función para manejar el clic en las notificaciones
     function handleNotificationClick(notificationElement) {
       notificationElement.style.transform = "translateY(-10px)";
       notificationElement.style.transition = "transform 0.3s ease";
@@ -277,7 +260,6 @@
       }, 300);
     }
 
-    // Función para mostrar la sección correspondiente
     function showSection(sectionId) {
       const sections = document.querySelectorAll('.content-section');
       sections.forEach(section => {
@@ -290,14 +272,13 @@
       }
     }
 
-    // Lista de eventos con sus horarios
     const events = [
       {
         id: 'live-event-card',
-        startHour: 0,
+        startHour: 19,
         startMinute: 0,
-        endHour: 4,
-        endMinute: 0
+        endHour: 19,
+        endMinute: 42
       },
       {
         id: 'morning-event-card',
@@ -306,38 +287,30 @@
         endHour: 14,
         endMinute: 20
       }
-      // Aquí puedes agregar más eventos con diferentes horarios
     ];
 
-    // Función para manejar la visibilidad de los eventos
     function checkLiveEvent() {
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
-      const currentMinutes = currentTime.getMinutes();
-
+      const currentMinute = currentTime.getMinutes();
       const noEvent = document.getElementById('no-event');
       const liveEvent = document.getElementById('live-event');
+      let anyEventActive = false;
 
-      let anyEventActive = false; // Para controlar si hay algún evento activo
-
-      // Comprobar cada evento
       events.forEach(event => {
-        const eventCard = document.getElementById(event.id);
+        const { startHour, startMinute, endHour, endMinute, id } = event;
+        const startTime = startHour * 60 + startMinute;
+        const endTime = endHour * 60 + endMinute;
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
 
-        // Verificar si la hora y los minutos están dentro del rango
-        const startTime = event.startHour * 60 + event.startMinute;
-        const endTime = event.endHour * 60 + event.endMinute;
-        const currentTimeInMinutes = currentHour * 60 + currentMinutes;
-
-        if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
-          eventCard.style.display = 'flex'; // Mostrar evento
+        if (currentTimeInMinutes >= startTime && currentTimeInMinutes < endTime) {
+          document.getElementById(id).style.display = 'flex';
           anyEventActive = true;
         } else {
-          eventCard.style.display = 'none'; // Ocultar evento
+          document.getElementById(id).style.display = 'none';
         }
       });
 
-      // Si no hay eventos activos, mostrar mensaje "No hay eventos en vivo"
       if (anyEventActive) {
         noEvent.style.display = 'none';
         liveEvent.style.display = 'block';
