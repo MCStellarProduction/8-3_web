@@ -212,12 +212,23 @@
 
       <div class="live-event" id="live-event">En Vivo</div>
 
+      <!-- Ejemplo de evento -->
       <div class="event-card" id="live-event-card" style="display: none;">
         <div class="dot"></div>
         <div class="event-details">
-          <h4>Evento de Ejemplo</h4>
+          <h4>Evento de Ejemplo (00:00 AM - 04:00 AM)</h4>
           <p>Descripción del evento de ejemplo.</p>
           <p class="time">De 00:00 AM a 04:00 AM</p>
+        </div>
+      </div>
+
+      <!-- Nuevo evento (04:50 AM - 14:20 PM) -->
+      <div class="event-card" id="morning-event-card" style="display: none;">
+        <div class="dot"></div>
+        <div class="event-details">
+          <h4>Evento Mañanero (04:50 AM - 14:20 PM)</h4>
+          <p>Descripción del evento de la mañana.</p>
+          <p class="time">De 04:50 AM a 14:20 PM</p>
         </div>
       </div>
     </div>
@@ -277,29 +288,51 @@
       }
     }
 
-    // Función para manejar el evento en vivo
+    // Lista de eventos con sus horarios
+    const events = [
+      {
+        id: 'live-event-card',
+        startHour: 19,
+        startMinute: 0,
+        endHour: 19,
+        endMinute: 32
+      },
+      {
+        id: 'morning-event-card',
+        startHour: 4,
+        startMinute: 50,
+        endHour: 14,
+        endMinute: 20
+      }
+      // Aquí puedes agregar más eventos con diferentes horarios
+    ];
+
+    // Función para manejar la visibilidad de los eventos
     function checkLiveEvent() {
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
+      const currentMinutes = currentTime.getMinutes();
 
-      const noEvent = document.getElementById('no-event');
-      const liveEvent = document.getElementById('live-event');
-      const liveEventCard = document.getElementById('live-event-card');
+      // Comprobar cada evento
+      events.forEach(event => {
+        const eventCard = document.getElementById(event.id);
 
-      if (currentHour >= 19 && currentHour < 22) {
-        noEvent.style.display = 'none';
-        liveEvent.style.display = 'block';
-        liveEventCard.style.display = 'flex'; // Mostrar el evento en vivo
-      } else {
-        noEvent.style.display = 'block';
-        liveEvent.style.display = 'none';
-        liveEventCard.style.display = 'none'; // Ocultar el evento en vivo
-      }
+        // Verificar si la hora y los minutos están dentro del rango
+        const startTime = event.startHour * 60 + event.startMinute;
+        const endTime = event.endHour * 60 + event.endMinute;
+        const currentTimeInMinutes = currentHour * 60 + currentMinutes;
+
+        if (currentTimeInMinutes >= startTime && currentTimeInMinutes <= endTime) {
+          eventCard.style.display = 'flex'; // Mostrar evento
+        } else {
+          eventCard.style.display = 'none'; // Ocultar evento
+        }
+      });
     }
 
     window.onload = function() {
       showSection('menu');
-      checkLiveEvent(); // Verificar el estado del evento en vivo al cargar la página
+      checkLiveEvent(); // Verificar los eventos en vivo al cargar la página
     };
   </script>
 
