@@ -80,11 +80,17 @@
       padding: 50px;
       text-align: center;
       min-height: 100vh;
+      margin-top: 70px; /* Añadido margen para no solapar con la barra de navegación */
     }
 
     /* Sección de menú */
     #menu {
       background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px; /* Separación entre los bloques */
+      padding: 30px;
+      border-radius: 15px;
     }
 
     /* Sección de información */
@@ -142,7 +148,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%; /* Limita el ancho */
+      width: 80%;
       word-wrap: break-word;
     }
 
@@ -166,9 +172,9 @@
 
     .event-card {
       display: flex;
-      flex-direction: column; /* Cambié a columna para que se apilen */
+      flex-direction: column;
       align-items: flex-start;
-      gap: 15px; /* Separación entre elementos */
+      gap: 15px;
       margin-top: 30px;
     }
 
@@ -197,13 +203,13 @@
       font-size: 18px;
       margin: 0;
       font-weight: 600;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details p {
       font-size: 14px;
       color: #555;
-      margin-bottom: 10px; /* Añadí margen */
+      margin-bottom: 10px;
     }
 
     .event-card .event-details .time {
@@ -274,17 +280,17 @@
   </div>
 
   <div id="informacion" class="content-section">
-    <h1 class="section-title">Informacion de Clase</h1>
-    <p>Aqui se vera la informacion de la clase y creditos de la pagina</p>
+    <h1 class="section-title">Información de Clase</h1>
+    <p>Aqui se verá la información de la clase y créditos de la página</p>
     <br>
-    <h3>Creador de la Pagina</h3>
-    <h5>Luis Andres Zamora Aguilar</h5>
-    <h3>Seccion</h3>
+    <h3>Creador de la Página</h3>
+    <h5>Luis Andrés Zamora Aguilar</h5>
+    <h3>Sección</h3>
     <h5>8-3</h5>
-    <h3>Profesor Guia</h3>
+    <h3>Profesor Guía</h3>
     <h5>No Definido</h5>
     <h3>Colegio</h3>
-    <h5>Liceo Ing Samuel Saenz Flores</h5>
+    <h5>Liceo Ing. Samuel Saenz Flores</h5>
   </div>
 
   <div id="calendario" class="content-section">
