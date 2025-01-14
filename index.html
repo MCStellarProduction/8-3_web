@@ -7,11 +7,12 @@
   <link rel="icon" href="icon.jpg" type="image/jpg">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    /* Diseño general */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -21,13 +22,14 @@
 
     @keyframes backgroundFade {
       0% {
-        background: linear-gradient(to bottom, #b6fbff, #83a4d4);
+        background: linear-gradient(to bottom, #f1c40f, #9b59b6);
       }
       100% {
-        background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+        background: linear-gradient(to bottom right, #9b59b6, #f1c40f);
       }
     }
 
+    /* Contenedor de login */
     .login-container {
       background-color: white;
       padding: 40px;
@@ -51,6 +53,7 @@
       }
     }
 
+    /* Títulos y textos */
     .login-container h1 {
       font-size: 36px;
       margin-bottom: 20px;
@@ -67,6 +70,7 @@
       animation: fadeInText 1s 0.7s forwards;
     }
 
+    /* Estilos de los campos de entrada */
     .input-field {
       width: 100%;
       padding: 12px;
@@ -91,6 +95,7 @@
       color: #bbb;
     }
 
+    /* Botón de envío */
     .submit-btn {
       width: 100%;
       padding: 12px;
@@ -116,6 +121,7 @@
       transform: translateY(1px);
     }
 
+    /* Enlace de olvido de contraseña */
     .forgot-password {
       font-size: 14px;
       color: #5bbd5b;
@@ -190,6 +196,15 @@
       }, 3000);
     }
 
+    // Verifica si ya hay una sesión iniciada
+    function checkLoginStatus() {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        // Redirigir automáticamente si hay un usuario guardado en LocalStorage
+        window.location.href = credentials[loggedInUser];
+      }
+    }
+
     // Evento para el botón de iniciar sesión
     document.getElementById('submit-btn').addEventListener('click', function() {
       var username = document.getElementById('username').value;
@@ -208,6 +223,9 @@
       if (credentials[key]) {
         showStatusMessage("¡Inicio de sesión exitoso!", "success");
 
+        // Guardar el usuario en LocalStorage
+        localStorage.setItem('loggedInUser', key);
+
         // Redirigir a la página correspondiente después de 2 segundos
         setTimeout(function() {
           window.location.href = credentials[key]; // Redirigir a la página correspondiente
@@ -216,6 +234,9 @@
         showStatusMessage("Credenciales incorrectas, por favor intente de nuevo.", "error");
       }
     });
+
+    // Llamar a la función para comprobar si ya hay una sesión activa
+    checkLoginStatus();
   </script>
 
 </body>
