@@ -1,20 +1,20 @@
 {
   "events": [
     {
-      "name": "Update Server",
-      "description": "Updating the WebApp...",
-      "time": "2:00 AM"
+      "name": "Inicio De Clases!!",
+      "description": "Comienzan las clases y se asignan los integrantes de las secciones",
+      "time": "ERROR_404"
     }
   ],
   "news": [
     {
-      "title": "Stellar Supporting",
-      "description": "This WebApp its been supported by MCStellar Production",
+      "title": "Cambio De Horario",
+      "description": "Habra un cambion de horario el ____",
       "time": "Day, Month"
     },
     {
-      "title": "Experimental App",
-      "description": "This App its not Available",
+      "title": "Example",
+      "description": "Test App",
       "time": "Day, Month"
     }
   ]
