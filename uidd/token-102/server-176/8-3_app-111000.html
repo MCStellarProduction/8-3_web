@@ -12,17 +12,18 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+      background: linear-gradient(to bottom right, #A2C2E9, #D1F0FF);
       height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       user-select: none;
+      transition: all 0.3s ease;
     }
 
     .navbar {
       background-color: #5bbd5b;
-      padding: 15px 20px;
+      padding: 15px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -32,35 +33,38 @@
       width: 100%;
       z-index: 1000;
       box-sizing: border-box;
+      border-bottom: 3px solid #3e8e41;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .navbar .nav-icons {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       align-items: center;
     }
 
     .navbar .nav-icons i {
-      font-size: 24px;
+      font-size: 26px;
       color: white;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .navbar .nav-icons i:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
 
     .profile {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       color: white;
       overflow: hidden;
     }
 
     .profile .username {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -69,10 +73,16 @@
     }
 
     .profile img {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
+      border: 2px solid white;
+      transition: all 0.3s ease;
+    }
+
+    .profile img:hover {
+      transform: scale(1.1);
     }
 
     .content-section {
@@ -80,45 +90,53 @@
       padding: 50px;
       text-align: center;
       min-height: 100vh;
-      margin-top: 70px; /* Añadido margen para no solapar con la barra de navegación */
-      transition: all 0.3s ease;
+      margin-top: 90px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s ease;
     }
 
     /* Sección de menú */
     #menu {
-      background-color: #f1f1f1;
+      background-color: #f5f8fc;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
-      margin: 70px auto; /* centrado en la pantalla */
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      margin: 90px auto;
       box-sizing: border-box;
+      transition: all 0.5s ease;
     }
 
     /* Sección de información */
     #informacion {
       background-color: #fff3e0;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       margin-top: 70px;
+      transition: all 0.5s ease;
     }
 
     /* Sección de calendario */
     #calendario {
-      background-color: #d1c4e9;
-      padding: 20px;
-      border-radius: 10px;
+      background-color: #f1f1f1;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       margin-top: 70px;
+      transition: all 0.5s ease;
     }
 
     .section-title {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 600;
+      color: #333;
       margin-bottom: 20px;
+      text-transform: uppercase;
     }
 
     .section-title::after {
@@ -128,16 +146,12 @@
 
     .event-box, .noticia-box {
       width: 100%;
-      height: auto;
-      position: relative;
-      background-color: white;
-      border-radius: 20px;
+      background-color: #ffffff;
+      border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
       padding: 20px;
-      box-sizing: border-box;
-      margin-top: 20px;
+      margin-top: 25px;
+      transition: all 0.3s ease;
     }
 
     .event-box h2, .noticia-box h2 {
@@ -145,6 +159,7 @@
       font-size: 24px;
       font-weight: 600;
       margin-bottom: 20px;
+      color: #333;
     }
 
     .no-event, .no-noticia {
@@ -160,7 +175,6 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       gap: 15px;
       margin-top: 20px;
     }
@@ -189,6 +203,7 @@
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 10px;
+      color: #333;
     }
 
     .event-card .event-details p, .noticia-card .noticia-details p {
@@ -207,11 +222,23 @@
       overflow-x: hidden;
     }
 
+    /* Animación suave */
+    .content-section {
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     /* Responsividad */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
         gap: 15px;
+        padding: 10px;
       }
 
       .content-section {
@@ -219,7 +246,7 @@
       }
 
       #menu {
-        padding: 20px;
+        padding: 25px;
       }
     }
   </style>
@@ -288,7 +315,7 @@
     }
 
     function loadEvents() {
-      fetch('eventos.json')  // URL del archivo JSON con los eventos
+      fetch('eventos.json')  
         .then(response => {
           if (!response.ok) {
             throw new Error('No se pudo cargar eventos.json');
@@ -350,7 +377,7 @@
     }
 
     function loadNews() {
-      fetch('noticias.json')  // URL del archivo JSON con las noticias
+      fetch('noticias.json')  
         .then(response => {
           if (!response.ok) {
             throw new Error('No se pudo cargar noticias.json');
