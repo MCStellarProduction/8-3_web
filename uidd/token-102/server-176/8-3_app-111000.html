@@ -385,6 +385,24 @@
       }
     }
 
+    function loadData() {
+  // Agregar un timestamp a la URL para evitar caché
+  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
+  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
+
+  fetch(urlWithTimestamp)
+    .then(response => response.json())
+    .then(data => {
+      loadEvents(data.events);
+      loadNoticias(data.news);
+    })
+    .catch(error => {
+      console.error('Error al cargar el archivo JSON:', error);
+    });
+}
+
+
     function loadNoticias(news) {
       const noticiaContainer = document.getElementById('noticia-container');
       if (news.length > 0) {
