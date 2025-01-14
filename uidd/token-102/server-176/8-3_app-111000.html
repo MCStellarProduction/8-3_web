@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="icon.jpg" type="image/jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Inicio • NoName</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
+    /* Establecer el diseño general de la página */
     body {
       margin: 0;
       padding: 0;
@@ -21,9 +22,10 @@
       transition: all 0.3s ease;
     }
 
+    /* Barra de navegación */
     .navbar {
       background-color: #5bbd5b;
-      padding: 15px 25px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,7 +47,7 @@
     }
 
     .navbar .nav-icons i {
-      font-size: 26px;
+      font-size: 1.6rem;
       color: white;
       cursor: pointer;
       transition: transform 0.3s ease;
@@ -64,7 +66,7 @@
     }
 
     .profile .username {
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: 600;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -73,8 +75,8 @@
     }
 
     .profile img {
-      width: 50px;
-      height: 50px;
+      width: 4rem;
+      height: 4rem;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid white;
@@ -85,57 +87,52 @@
       transform: scale(1.1);
     }
 
+    /* Secciones del contenido */
     .content-section {
       display: none;
-      padding: 50px;
+      padding: 5vw;
       text-align: center;
       min-height: 100vh;
-      margin-top: 90px;
-      border-radius: 10px;
+      margin-top: 7rem;
+      border-radius: 1rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       transition: all 0.5s ease;
     }
 
-    /* Sección de menú */
     #menu {
       background-color: #f5f8fc;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      padding: 40px;
-      border-radius: 20px;
+      padding: 4vw;
+      border-radius: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      max-width: 1000px;
-      margin: 90px auto;
+      max-width: 95%;
+      margin: 7rem auto;
       box-sizing: border-box;
-      transition: all 0.5s ease;
     }
 
-    /* Sección de información */
     #informacion {
       background-color: #fff3e0;
-      padding: 30px;
-      border-radius: 20px;
+      padding: 3vw;
+      border-radius: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      margin-top: 70px;
-      transition: all 0.5s ease;
+      margin-top: 5rem;
     }
 
-    /* Sección de calendario */
     #calendario {
       background-color: #f1f1f1;
-      padding: 30px;
-      border-radius: 20px;
+      padding: 3vw;
+      border-radius: 2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      margin-top: 70px;
-      transition: all 0.5s ease;
+      margin-top: 5rem;
     }
 
     .section-title {
-      font-size: 28px;
+      font-size: 2rem;
       font-weight: 600;
       color: #333;
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       text-transform: uppercase;
     }
 
@@ -147,23 +144,23 @@
     .event-box, .noticia-box {
       width: 100%;
       background-color: #ffffff;
-      border-radius: 15px;
+      border-radius: 1rem;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-top: 25px;
+      padding: 2vw;
+      margin-top: 2rem;
       transition: all 0.3s ease;
     }
 
     .event-box h2, .noticia-box h2 {
       text-align: center;
-      font-size: 24px;
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
       color: #333;
     }
 
     .no-event, .no-noticia {
-      font-size: 18px;
+      font-size: 1rem;
       color: #777;
       text-align: center;
       width: 100%;
@@ -175,13 +172,13 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     .event-card .dot, .noticia-card .dot {
-      width: 15px;
-      height: 15px;
+      width: 1rem;
+      height: 1rem;
       background-color: red;
       border-radius: 50%;
       animation: dot-blink 1.5s infinite;
@@ -195,29 +192,29 @@
 
     .event-card .event-details, .noticia-card .noticia-details {
       text-align: left;
-      padding-left: 15px;
+      padding-left: 1vw;
       width: 100%;
     }
 
     .event-card .event-details h4, .noticia-card .noticia-details h4 {
-      font-size: 18px;
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 0.8rem;
       color: #333;
     }
 
     .event-card .event-details p, .noticia-card .noticia-details p {
-      font-size: 14px;
+      font-size: 1rem;
       color: #555;
-      margin-bottom: 10px;
+      margin-bottom: 0.8rem;
     }
 
     .event-card .event-details .time, .noticia-card .noticia-details .time {
-      font-size: 12px;
+      font-size: 0.9rem;
       color: #777;
     }
 
-    /* Bloquear desplazamiento horizontal en el menú */
+    /* Bloquear desplazamiento horizontal */
     body.menu-active {
       overflow-x: hidden;
     }
@@ -233,20 +230,20 @@
       100% { opacity: 1; }
     }
 
-    /* Responsividad */
+    /* Responsividad: Ajustes para dispositivos más pequeños */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
-        gap: 15px;
-        padding: 10px;
+        gap: 1rem;
+        padding: 1.5vw;
       }
 
       .content-section {
-        padding: 20px;
+        padding: 4vw;
       }
 
       #menu {
-        padding: 25px;
+        padding: 4vw;
       }
     }
   </style>
