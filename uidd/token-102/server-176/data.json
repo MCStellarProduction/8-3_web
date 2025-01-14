@@ -1,26 +1,26 @@
 {
   "events": [
     {
-      "name": "Evento Test 1",
-      "time": "20:00",
-      "description": "Descripción del Evento 1"
+      "name": "Evento 1",
+      "description": "Descripción del evento 1",
+      "time": "15:00"
     },
     {
-      "name": "Testeo 2",
-      "time": "22:00",
-      "description": "Descripción del Evento 2"
+      "name": "Evento 2",
+      "description": "Descripción del evento 2",
+      "time": "17:30"
     }
   ],
   "news": [
     {
-      "title": "Noticia Test",
+      "title": "Noticia 1",
       "description": "Descripción de la noticia 1",
-      "time": "Hace 2 horas"
+      "time": "14:00"
     },
     {
-      "title": "Noticia Testeo 2",
+      "title": "Noticia 2",
       "description": "Descripción de la noticia 2",
-      "time": "Hace 3 horas"
+      "time": "16:30"
     }
   ]
 }
