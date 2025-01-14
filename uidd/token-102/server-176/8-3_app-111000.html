@@ -175,7 +175,7 @@
       margin-top: 2rem;
       padding: 20px;
       box-sizing: border-box;
-      overflow: hidden; /* Para evitar que los textos se salgan del cuadro */
+      overflow: hidden;
     }
 
     .event-card, .noticia-card {
@@ -189,15 +189,15 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       padding: 15px;
       box-sizing: border-box;
-      overflow: hidden; /* Para evitar que el contenido se desborde */
+      overflow: hidden;
     }
 
     .event-card .event-details, .noticia-card .noticia-details {
       text-align: left;
       padding-left: 1vw;
       width: 100%;
-      word-wrap: break-word; /* Para permitir que el texto se divida en varias líneas si es necesario */
-      overflow: hidden; /* Evita que el contenido se desborde del contenedor */
+      word-wrap: break-word;
+      overflow: hidden;
     }
 
     .event-card .event-details h4, .noticia-card .noticia-details h4 {
@@ -205,16 +205,13 @@
       font-weight: 600;
       margin-bottom: 0.8rem;
       color: #333;
-      overflow: hidden; /* Evita que los títulos largos se desborden */
-      text-overflow: ellipsis;
-      white-space: nowrap; /* Si el título es muy largo, se truncará con puntos suspensivos */
     }
 
     .event-card .event-details p, .noticia-card .noticia-details p {
       font-size: 0.8rem;
       color: #555;
       margin-bottom: 20px;
-      word-wrap: break-word; /* Permite que el texto largo se divida */
+      word-wrap: break-word;
     }
 
     .event-card .event-details .time, .noticia-card .noticia-details .time {
@@ -238,7 +235,6 @@
       100% { opacity: 1; }
     }
 
-    /* Responsividad: Ajustes para dispositivos más pequeños */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
@@ -352,19 +348,23 @@
       showSection('menu');
 
       // Cargar eventos y noticias
-      loadEvents();
-      loadNoticias();
+      loadData();
     };
 
-    function loadEvents() {
-      // Aquí podrías hacer una llamada AJAX o trabajar con una API para obtener eventos.
-      // Vamos a simular algunos eventos:
+    function loadData() {
+      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
+      fetch('https://mcstellarproduction.github.io/8-3_web/data.json')
+        .then(response => response.json())
+        .then(data => {
+          loadEvents(data.events);
+          loadNoticias(data.news);
+        })
+        .catch(error => {
+          console.error('Error al cargar el archivo JSON:', error);
+        });
+    }
 
-      const events = [
-        { name: 'Evento 1', time: '20:00', description: 'Descripción del Evento 1' },
-        { name: 'Evento 2', time: '22:00', description: 'Descripción del Evento 2' }
-      ];
-
+    function loadEvents(events) {
       const eventsContainer = document.getElementById('events-container');
       if (events.length > 0) {
         events.forEach(event => {
@@ -385,18 +385,10 @@
       }
     }
 
-    function loadNoticias() {
-      // Aquí podrías hacer una llamada AJAX o trabajar con una API para obtener noticias.
-      // Vamos a simular algunas noticias:
-
-      const noticias = [
-        { title: 'Noticia 1', description: 'Descripción de la noticia 1', time: 'Hace 2 horas' },
-        { title: 'Noticia 2', description: 'Descripción de la noticia 2', time: 'Hace 3 horas' }
-      ];
-
+    function loadNoticias(news) {
       const noticiaContainer = document.getElementById('noticia-container');
-      if (noticias.length > 0) {
-        noticias.forEach(noticia => {
+      if (news.length > 0) {
+        news.forEach(noticia => {
           const noticiaCard = document.createElement('div');
           noticiaCard.classList.add('noticia-card');
           noticiaCard.innerHTML = `
