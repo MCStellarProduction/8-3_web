@@ -1,21 +1,21 @@
 {
   "events": [
     {
-      "name": "Evento 1",
-      "description": "Descripción del evento 1",
-      "time": "15:00"
+      "name": "Update Server",
+      "description": "Updating the WebApp...",
+      "time": "1:50 PM"
     },
     {
-      "name": "Evento 32",
-      "description": "Descripción del evento 2",
-      "time": "17:30"
+      "name": "Test Server",
+      "description": "This is a Experimental WebApp. Its in progress...",
+      "time": "1:51 PM"
     }
   ],
   "news": [
     {
-      "title": "Noticia 1",
-      "description": "Descripción de la noticia 1",
-      "time": "14:00"
+      "title": "Stellar Supporting",
+      "description": "This WebApp its been supported by MCStellar Production",
+      "time": "14, January"
     },
     {
       "title": "Noticia 2",
