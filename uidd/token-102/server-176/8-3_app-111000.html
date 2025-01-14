@@ -219,30 +219,54 @@
       color: #777;
     }
 
-    /* Estilos para el cuadro de noticias */
-    #noticia-container {
+    /* Sección de Noticias */
+    .noticia-box {
+      width: 100%;
+      height: auto;
+      position: relative;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    #noticia-container .event-card {
-      background-color: #f9f9f9;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
     }
 
-    #noticia-container .event-details h4 {
-      font-size: 20px;
+    .noticia-box h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+    }
+
+    .noticia-box .no-event {
+      font-size: 18px;
+      color: #777;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      word-wrap: break-word;
+    }
+
+    .noticia-box .live-event {
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 16px;
+      color: red;
       font-weight: bold;
-      color: #333;
-    }
-
-    #noticia-container .event-details p {
-      font-size: 10px;
-      color: #555;
+      animation: blink 1.5s infinite;
+      z-index: 1;
     }
 
     /* Bloquear desplazamiento horizontal en el menú */
@@ -275,7 +299,7 @@
       <div id="events-container"></div>
     </div>
 
-    <div class="event-box">
+    <div class="noticia-box">
       <h2>Última Noticia</h2>
       <div class="no-event" id="no-noticia">No hay ninguna noticia disponible...</div>
       <div id="noticia-container"></div>
