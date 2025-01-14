@@ -13,7 +13,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #A2C2E9, #D1F0FF);
+      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -244,6 +244,21 @@
 
       #menu {
         padding: 4vw;
+      }
+
+      body {
+        background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
+      }
+    }
+
+    /* Ajustes para escritorio */
+    @media (min-width: 769px) {
+      body {
+        background: linear-gradient(to bottom right, #8e44ad, #f39c12); /* Gradiente de morado a amarillo más fuerte */
+      }
+
+      .navbar {
+        padding: 2vw;
       }
     }
   </style>
