@@ -3,24 +3,19 @@
     {
       "name": "Update Server",
       "description": "Updating the WebApp...",
-      "time": "1:50 PM"
-    },
-    {
-      "name": "Test Server",
-      "description": "This is a Experimental WebApp. Its in progress...",
-      "time": "1:51 PM"
+      "time": "2:00 AM"
     }
   ],
   "news": [
     {
       "title": "Stellar Supporting",
       "description": "This WebApp its been supported by MCStellar Production",
-      "time": "14, January"
+      "time": "Day, Month"
     },
     {
-      "title": "Noticia 2",
-      "description": "Descripción de la noticia 2",
-      "time": "16:30"
+      "title": "Experimental App",
+      "description": "This App its not Available",
+      "time": "Day, Month"
     }
   ]
 }
