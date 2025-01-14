@@ -8,6 +8,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
+    /* Estilos para la pantalla de carga */
+    .loader {
+      display: block;
+      --height-of-loader: 4px;
+      --loader-color: #0071e2;
+      width: 130px;
+      height: var(--height-of-loader);
+      border-radius: 30px;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .loader::before {
+      content: "";
+      position: absolute;
+      background: var(--loader-color);
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      border-radius: 30px;
+      animation: moving 1s ease-in-out infinite;
+    }
+
+    @keyframes moving {
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+        right: 0;
+        left: unset;
+      }
+    }
+
     /* Establecer el diseño general de la página */
     body {
       margin: 0;
@@ -256,10 +294,12 @@
         padding: 2vw;
       }
     }
-
   </style>
 </head>
 <body>
+
+  <!-- Pantalla de carga -->
+  <div class="loader"></div>
 
   <div class="navbar">
     <div class="nav-icons">
@@ -320,130 +360,76 @@
       }
     }
 
-    function loadEvents() {
-      fetch('eventos.json')  
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo cargar eventos.json');
-          }
-          return response.json();
-        })
-        .then(data => {
-          const eventsContainer = document.getElementById('events-container');
-          const noEvent = document.getElementById('no-event');
-          const liveEvent = document.getElementById('live-event');
-          let anyEventActive = false;
-
-          eventsContainer.innerHTML = '';
-
-          data.eventos.forEach(event => {
-            if (event.activo) {
-              anyEventActive = true;
-
-              const eventCard = document.createElement('div');
-              eventCard.classList.add('event-card');
-              eventCard.id = event.id;
-
-              const dot = document.createElement('div');
-              dot.classList.add('dot');
-
-              const eventDetails = document.createElement('div');
-              eventDetails.classList.add('event-details');
-
-              const eventTitle = document.createElement('h4');
-              eventTitle.textContent = event.nombre;
-
-              const eventDescription = document.createElement('p');
-              eventDescription.textContent = event.descripcion;
-
-              const eventTime = document.createElement('p');
-              eventTime.classList.add('time');
-              eventTime.textContent = `De ${event.hora_inicio} a ${event.hora_fin}`;
-
-              eventDetails.appendChild(eventTitle);
-              eventDetails.appendChild(eventDescription);
-              eventDetails.appendChild(eventTime);
-
-              eventCard.appendChild(dot);
-              eventCard.appendChild(eventDetails);
-
-              eventsContainer.appendChild(eventCard);
-            }
-          });
-
-          if (anyEventActive) {
-            noEvent.style.display = 'none';
-            liveEvent.style.display = 'block';
-          } else {
-            noEvent.style.display = 'block';
-            liveEvent.style.display = 'none';
-          }
-        })
-        .catch(error => console.error('Error al cargar los eventos:', error));
-    }
-
-    function loadNews() {
-      fetch('noticias.json')  
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('No se pudo cargar noticias.json');
-          }
-          return response.json();
-        })
-        .then(data => {
-          const newsContainer = document.getElementById('noticia-container');
-          const noNoticia = document.getElementById('no-noticia');
-          let anyNewsAvailable = false;
-
-          newsContainer.innerHTML = '';
-
-          data.noticias.forEach(news => {
-            anyNewsAvailable = true;
-
-            const newsCard = document.createElement('div');
-            newsCard.classList.add('noticia-card');
-            newsCard.id = news.id;
-
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-
-            const newsDetails = document.createElement('div');
-            newsDetails.classList.add('noticia-details');
-
-            const newsTitle = document.createElement('h4');
-            newsTitle.textContent = news.titulo;
-
-            const newsDescription = document.createElement('p');
-            newsDescription.textContent = news.descripcion;
-
-            const newsTime = document.createElement('p');
-            newsTime.classList.add('time');
-            newsTime.textContent = news.fecha;
-
-            newsDetails.appendChild(newsTitle);
-            newsDetails.appendChild(newsDescription);
-            newsDetails.appendChild(newsTime);
-
-            newsCard.appendChild(dot);
-            newsCard.appendChild(newsDetails);
-
-            newsContainer.appendChild(newsCard);
-          });
-
-          if (anyNewsAvailable) {
-            noNoticia.style.display = 'none';
-          } else {
-            noNoticia.style.display = 'block';
-          }
-        })
-        .catch(error => console.error('Error al cargar las noticias:', error));
-    }
-
     window.onload = function() {
+      // Ocultar el loader una vez que la página esté completamente cargada
+      const loader = document.querySelector('.loader');
+      loader.style.display = 'none';
+
+      // Mostrar la sección del menú por defecto
       showSection('menu');
+
+      // Cargar eventos y noticias
       loadEvents();
-      loadNews();
+      loadNoticias();
     };
+
+    function loadEvents() {
+      // Aquí podrías hacer una llamada AJAX o trabajar con una API para obtener eventos.
+      // Vamos a simular algunos eventos:
+
+      const events = [
+        { name: 'Evento 1', time: '20:00', description: 'Descripción del Evento 1' },
+        { name: 'Evento 2', time: '22:00', description: 'Descripción del Evento 2' }
+      ];
+
+      const eventsContainer = document.getElementById('events-container');
+      if (events.length > 0) {
+        events.forEach(event => {
+          const eventCard = document.createElement('div');
+          eventCard.classList.add('event-card');
+          eventCard.innerHTML = `
+            <div class="dot"></div>
+            <div class="event-details">
+              <h4>${event.name}</h4>
+              <p>${event.description}</p>
+              <p class="time">${event.time}</p>
+            </div>
+          `;
+          eventsContainer.appendChild(eventCard);
+        });
+      } else {
+        document.getElementById('no-event').style.display = 'block';
+      }
+    }
+
+    function loadNoticias() {
+      // Aquí podrías hacer una llamada AJAX o trabajar con una API para obtener noticias.
+      // Vamos a simular algunas noticias:
+
+      const noticias = [
+        { title: 'Noticia 1', description: 'Descripción de la noticia 1', time: 'Hace 2 horas' },
+        { title: 'Noticia 2', description: 'Descripción de la noticia 2', time: 'Hace 3 horas' }
+      ];
+
+      const noticiaContainer = document.getElementById('noticia-container');
+      if (noticias.length > 0) {
+        noticias.forEach(noticia => {
+          const noticiaCard = document.createElement('div');
+          noticiaCard.classList.add('noticia-card');
+          noticiaCard.innerHTML = `
+            <div class="dot"></div>
+            <div class="noticia-details">
+              <h4>${noticia.title}</h4>
+              <p>${noticia.description}</p>
+              <p class="time">${noticia.time}</p>
+            </div>
+          `;
+          noticiaContainer.appendChild(noticiaCard);
+        });
+      } else {
+        document.getElementById('no-noticia').style.display = 'block';
+      }
+    }
   </script>
 
 </body>
