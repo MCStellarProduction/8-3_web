@@ -4,9 +4,9 @@
       "name": "Evento de Ejemplo",
       "description": "Descripción del evento en vivo",
       "time": "12:00 PM",
-      "startTime": "2025-01-20T12:00:00",  
-      "endTime": "2025-01-20T14:00:00",  
-      "isLive": false                       
+      "startTime": "2025-01-20T11:50:35",  
+      "endTime": "2025-01-20T14:50:35",  
+      "isLive": true                      
     },
     {
       "name": "Evento Otro",
