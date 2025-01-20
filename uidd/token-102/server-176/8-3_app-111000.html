@@ -235,29 +235,27 @@
       100% { opacity: 1; }
     }
 
+    /* Estilo para la señal de "En Vivo" */
+    .live-indicator {
+      color: red;
+      font-weight: 600;
+      background-color: rgba(255, 0, 0, 0.2);
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .live-event {
+      border: 2px solid red;  /* Borde rojo cuando el evento está en vivo */
+      background-color: rgba(255, 0, 0, 0.1);  /* Fondo suave en rojo */
+    }
+
+    /* Mejorar visibilidad en móviles */
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5vw;
-      }
-
-      .content-section {
-        padding: 2vw;
-      }
-
-      #menu {
-        margin-top: 100px;
-        padding: 2vw;
-      }
-
-      .profile img {
-        width: 3rem;
-        height: 3rem;
-      }
-
-      .profile .username {
-        font-size: 1rem;
+      .live-indicator {
+        font-size: 0.9rem;
       }
     }
 
@@ -311,15 +309,8 @@
     <div class="noticia-box">
       <h2>Buzon</h2>
       <div class="no-event">Tu Buzon de Mensajes...</div>
-      <div id="noticia-container"></div>
-    <div class="dot"></div>
-            <div class="event-details">
-              <h4>Nobody</h4>
-              <p>...</p>
-            </div>
     </div>
   </div>
-</div>
 
   <div id="informacion" class="content-section">
     <h1 class="section-title">Información de Clase</h1>
@@ -364,8 +355,12 @@
     };
 
     function loadData() {
-      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
-      fetch('https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json')
+      // Agregar un timestamp a la URL para evitar caché
+      const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+      const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
+      const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
+
+      fetch(urlWithTimestamp)
         .then(response => response.json())
         .then(data => {
           loadEvents(data.events);
@@ -378,42 +373,42 @@
 
     function loadEvents(events) {
       const eventsContainer = document.getElementById('events-container');
+      const currentTime = new Date();  // Hora actual
+      eventsContainer.innerHTML = '';  // Limpiar el contenedor antes de llenarlo
+
       if (events.length > 0) {
         events.forEach(event => {
+          const eventStart = new Date(event.startTime);
+          const eventEnd = new Date(event.endTime);
+
+          // Verificar si el evento está en vivo
+          const isEventLive = currentTime >= eventStart && currentTime <= eventEnd;
           const eventCard = document.createElement('div');
           eventCard.classList.add('event-card');
+          
+          // Agregar la señal "En Vivo" si el evento está en vivo
+          const liveIndicator = isEventLive ? `<div class="live-indicator">En Vivo</div>` : '';
+
           eventCard.innerHTML = `
-            <div class="dot"></div>
+            ${liveIndicator}
             <div class="event-details">
               <h4>${event.name}</h4>
               <p>${event.description}</p>
               <p class="time">${event.time}</p>
             </div>
           `;
+
+          // Aplicar estilo adicional si el evento está en vivo
+          if (isEventLive) {
+            eventCard.classList.add('live-event');
+          }
+
           eventsContainer.appendChild(eventCard);
         });
       } else {
         document.getElementById('no-event').style.display = 'block';
       }
     }
-
-    function loadData() {
-  // Agregar un timestamp a la URL para evitar caché
-  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
-  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
-  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
-
-  fetch(urlWithTimestamp)
-    .then(response => response.json())
-    .then(data => {
-      loadEvents(data.events);
-      loadNoticias(data.news);
-    })
-    .catch(error => {
-      console.error('Error al cargar el archivo JSON:', error);
-    });
-}
-
 
     function loadNoticias(news) {
       const noticiaContainer = document.getElementById('noticia-container');
