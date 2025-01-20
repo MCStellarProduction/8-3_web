@@ -1,441 +1,170 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="icon.jpg" type="image/jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Inicio • Mauricio Solis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    /* Estilos para la pantalla de carga */
-    .loader {
-      display: block;
-      --height-of-loader: 4px;
-      --loader-color: #0071e2;
-      width: 130px;
-      height: var(--height-of-loader);
-      border-radius: 30px;
-      background-color: rgba(0, 0, 0, 0.2);
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Disable Account</title>
+    <!-- Fuentes de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100&display=block">
 
-    .loader::before {
-      content: "";
-      position: absolute;
-      background: var(--loader-color);
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      border-radius: 30px;
-      animation: moving 1s ease-in-out infinite;
-    }
+    <style>
+        /* General */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFA500, #800080); /* Degradado de naranja a morado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
+            user-select: none; /* Deshabilitar selección de texto */
+        }
 
-    @keyframes moving {
-      50% {
-        width: 100%;
-      }
-      100% {
-        width: 0;
-        right: 0;
-        left: unset;
-      }
-    }
+        /* Estilo para la pantalla de carga */
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: 600;
+            color: #FFF;
+            animation: fadeIn 2s ease-out;
+            border-radius: 15px;
+            transform: translate(-50%, -50%); /* Centramos exactamente la pantalla */
+        }
 
-    /* Establecer el diseño general de la página */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      transition: all 0.3s ease;
-    }
+        /* Animación de desvanecimiento */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
-    /* Barra de navegación */
-    .navbar {
-      background: linear-gradient(to bottom right, #9b59b6, #f1c40f);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-sizing: border-box;
-      border-bottom: 3px solid #e8b71a;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+        /* Animación de giro SVG */
+        svg {
+            width: 3.25em;
+            transform-origin: center;
+            animation: rotate4 2s linear infinite;
+        }
 
-    .navbar .nav-icons {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
+        circle {
+            fill: none;
+            stroke: hsl(214, 97%, 59%);
+            stroke-width: 2;
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: dash4 1.5s ease-in-out infinite;
+        }
 
-    .navbar .nav-icons i {
-      font-size: 1.6rem;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+        @keyframes rotate4 {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-    .navbar .nav-icons i:hover {
-      transform: scale(1.2);
-    }
+        @keyframes dash4 {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
 
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: white;
-      overflow: hidden;
-    }
+            50% {
+                stroke-dasharray: 90, 200;
+                stroke-dashoffset: -35px;
+            }
 
-    .profile .username {
-      font-size: 1.2rem;
-      font-weight: 600;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      max-width: 150px;
-    }
+            100% {
+                stroke-dashoffset: -125px;
+            }
+        }
 
-    .profile img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-      transition: all 0.3s ease;
-    }
+        /* Estilo para el contenido principal */
+        #content {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInContent 1.5s ease-in-out;
+        }
 
-    .profile img:hover {
-      transform: scale(1.1);
-    }
+        /* Animación para el contenido */
+        @keyframes fadeInContent {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Secciones del contenido */
-    .content-section {
-      display: none;
-      padding: 5vw;
-      text-align: center;
-      min-height: 100vh;
-      margin-top: 7rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.5s ease;
-    }
+        /* Estilo para los encabezados */
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #FF6347; /* Color para el texto del título */
+            animation: fadeInText 1s ease-out;
+        }
 
-    #menu {
-      background-color: #f5f8fc;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding-bottom: 50px;
-      width: 100vw;
-      border-radius: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
-      margin-top: 100px;
-    }
+        /* Animación de desvanecimiento para los textos */
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
-    #informacion, #calendario {
-      background-color: #fff3e0;
-      width: 100vw;
-      left: 50%;
-      border-radius: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      margin-top: 100px;
-    }
+        /* Estilo para el texto adicional */
+        p {
+            font-size: 22px;
+            margin: 10px 0;
+            color: #333;
+            opacity: 0;
+            animation: fadeInText 2s ease-out 0.5s forwards;
+        }
 
-    .section-title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
+        /* Estilo de los íconos */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 800, 'GRAD' 0, 'opsz' 48;
+            font-size: 80px;
+            color: #FF6347;
+            margin-bottom: 20px;
+            animation: fadeInText 2s ease-out 1s forwards;
+        }
 
-    .event-box, .noticia-box {
-      width: 100%;
-      height: auto;
-      background-color: #ffffff;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      margin-top: 2rem;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow: hidden;
-    }
-
-    .event-card, .noticia-card {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      background-color: #fff;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      box-sizing: border-box;
-      overflow: hidden;
-    }
-
-    .event-card .event-details, .noticia-card .noticia-details {
-      text-align: left;
-      padding-left: 1vw;
-      width: 100%;
-      word-wrap: break-word;
-      overflow: hidden;
-    }
-
-    .event-card .event-details h4, .noticia-card .noticia-details h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      color: #333;
-    }
-
-    .event-card .event-details p, .noticia-card .noticia-details p {
-      font-size: 0.8rem;
-      color: #555;
-      margin-bottom: 20px;
-      word-wrap: break-word;
-    }
-
-    .event-card .event-details .time, .noticia-card .noticia-details .time {
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    /* Bloquear desplazamiento horizontal */
-    body.menu-active {
-      overflow-x: hidden;
-    }
-
-    /* Animación suave */
-    .content-section {
-      opacity: 0;
-      animation: fadeIn 0.6s forwards;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5vw;
-      }
-
-      .content-section {
-        padding: 2vw;
-      }
-
-      #menu {
-        margin-top: 100px;
-        padding: 2vw;
-      }
-
-      .profile img {
-        width: 3rem;
-        height: 3rem;
-      }
-
-      .profile .username {
-        font-size: 1rem;
-      }
-    }
-
-    @media (min-width: 769px) {
-      .navbar {
-        padding: 15px 40px;
-      }
-
-      .content-section {
-        padding: 2vw;
-      }
-
-      #menu {
-        padding: 2vw;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <!-- Pantalla de carga -->
-  <div class="loader"></div>
-
-  <div class="navbar">
-    <div class="nav-icons">
-      <a href="javascript:void(0)" onclick="showSection('menu')"><i class="fas fa-bars menu-icon" title="Menú"></i></a>
-      <a href="javascript:void(0)" onclick="showSection('informacion')"><i class="fas fa-info-circle info-icon" title="Información"></i></a>
-      <a href="javascript:void(0)" onclick="showSection('calendario')"><i class="fas fa-calendar-alt calendar-icon" title="Calendario"></i></a>
+    <!-- Pantalla de carga -->
+    <div id="loading">
+        <!-- SVG de carga con animación -->
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
     </div>
 
-    <div class="profile">
-      <span class="username">Mauricio Solis</span>
-      <img src="img/111000.jpg" alt="Foto de Perfil">
-    </div>
-  </div>
-
-  <div id="menu" class="content-section">
-    <h1>Menú</h1>
-    <div class="event-box">
-      <h2>Eventos</h2>
-      <div class="no-event" id="no-event">Eventos Disponibles</div>
-      <div id="events-container"></div>
+    <!-- Contenido del mensaje -->
+    <div id="content">
+        <span class="material-symbols-outlined">block</span>
+        <h1> Disable Account </h1>
+        <p>Tu cuenta a sido deshabilitada</p>
+        <p>Deshabilitada por: Owner</p>
     </div>
 
-    <div class="noticia-box">
-      <h2>Noticias</h2>
-      <div class="no-event" id="no-noticia">Noticias Disponibles</div>
-      <div id="noticia-container"></div>
-    </div>
-
-    <div class="noticia-box">
-      <h2>Buzon</h2>
-      <div class="no-event">Tu Buzon de Mensajes...</div>
-      <div id="noticia-container"></div>
-    <div class="dot"></div>
-            <div class="event-details">
-              <h4>Luis Aguilar</h4>
-              <p>Bienvenido Enanin :D</p>
-            </div>
-    </div>
-  </div>
-</div>
-
-  <div id="informacion" class="content-section">
-    <h1 class="section-title">Información de Clase</h1>
-    <p>Aqui se verá la información de la clase y créditos de la página</p>
-    <br>
-    <h3>Creador de la Página</h3>
-    <h5>Luis Andrés Zamora Aguilar</h5>
-    <h3>Sección</h3>
-    <h5>8-3</h5>
-    <h3>Profesor Guía</h3>
-    <h5>No Definido</h5>
-  </div>
-
-  <div id="calendario" class="content-section">
-    <h1 class="section-title">Calendario</h1>
-    <p>Aquí va el contenido del Calendario.</p>
-  </div>
-
-  <script>
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(section => {
-        section.style.display = 'none';
-      });
-
-      const sectionToShow = document.getElementById(sectionId);
-      if (sectionToShow) {
-        sectionToShow.style.display = 'block';
-      }
-    }
-
-    window.onload = function() {
-      // Ocultar el loader una vez que la página esté completamente cargada
-      const loader = document.querySelector('.loader');
-      loader.style.display = 'none';
-
-      // Mostrar la sección del menú por defecto
-      showSection('menu');
-
-      // Cargar eventos y noticias
-      loadData();
-    };
-
-    function loadData() {
-      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
-      fetch('https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json')
-        .then(response => response.json())
-        .then(data => {
-          loadEvents(data.events);
-          loadNoticias(data.news);
-        })
-        .catch(error => {
-          console.error('Error al cargar el archivo JSON:', error);
-        });
-    }
-
-    function loadEvents(events) {
-      const eventsContainer = document.getElementById('events-container');
-      if (events.length > 0) {
-        events.forEach(event => {
-          const eventCard = document.createElement('div');
-          eventCard.classList.add('event-card');
-          eventCard.innerHTML = `
-            <div class="dot"></div>
-            <div class="event-details">
-              <h4>${event.name}</h4>
-              <p>${event.description}</p>
-              <p class="time">${event.time}</p>
-            </div>
-          `;
-          eventsContainer.appendChild(eventCard);
-        });
-      } else {
-        document.getElementById('no-event').style.display = 'block';
-      }
-    }
-
-    function loadData() {
-  // Agregar un timestamp a la URL para evitar caché
-  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
-  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
-  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
-
-  fetch(urlWithTimestamp)
-    .then(response => response.json())
-    .then(data => {
-      loadEvents(data.events);
-      loadNoticias(data.news);
-    })
-    .catch(error => {
-      console.error('Error al cargar el archivo JSON:', error);
-    });
-}
-
-
-    function loadNoticias(news) {
-      const noticiaContainer = document.getElementById('noticia-container');
-      if (news.length > 0) {
-        news.forEach(noticia => {
-          const noticiaCard = document.createElement('div');
-          noticiaCard.classList.add('noticia-card');
-          noticiaCard.innerHTML = `
-            <div class="dot"></div>
-            <div class="noticia-details">
-              <h4>${noticia.title}</h4>
-              <p>${noticia.description}</p>
-              <p class="time">${noticia.time}</p>
-            </div>
-          `;
-          noticiaContainer.appendChild(noticiaCard);
-        });
-      } else {
-        document.getElementById('no-noticia').style.display = 'block';
-      }
-    }
-  </script>
-
+    <script>
+        // Mostrar el contenido después de 5 segundos
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';  // Ocultar la pantalla de carga
+            document.getElementById('content').style.display = 'block';  // Mostrar el contenido
+        }, 5000);  // 5000 milisegundos = 5 segundos
+    </script>
 </body>
 </html>
