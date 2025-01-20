@@ -157,7 +157,6 @@
     .error {
       background-color: #f44336;
     }
-
   </style>
 </head>
 <body>
@@ -174,14 +173,20 @@
   </div>
 
   <script>
-    // Datos de credenciales
-    const credentials = {
-      "LuisAguilar;luis201030": "https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/8-3_app-000",
-      "MauricioSolis;18062011": "https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/8-3_app-001",
-      "Jossepp;pz201040": "https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/8-3_app-002",
-    };
+    // Cargar el archivo JSON con las credenciales
+    let credentials = {};
 
-    // Función para mostrar el mensaje de éxito o error
+    // Función para cargar las credenciales desde un archivo JSON
+    function loadCredentials() {
+      fetch('credentials.json')
+        .then(response => response.json())
+        .then(data => {
+          credentials = data; // Asignar las credenciales cargadas
+        })
+        .catch(error => console.error('Error al cargar las credenciales:', error));
+    }
+
+    // Mostrar mensaje de estado
     function showStatusMessage(message, type) {
       const statusMessage = document.getElementById('status-message');
       statusMessage.textContent = message;
@@ -195,6 +200,12 @@
           statusMessage.style.display = 'none';
         }, 300);
       }, 3000);
+    }
+
+    // Verificar las credenciales de usuario
+    function checkCredentials(username, password) {
+      const key = `${username};${password}`;
+      return credentials[key];
     }
 
     // Verifica si ya hay una sesión iniciada
@@ -217,24 +228,26 @@
         return;
       }
 
-      // Crear la clave de las credenciales
-      const key = `${username};${password}`;
-
       // Verificar las credenciales
-      if (credentials[key]) {
+      const redirectUrl = checkCredentials(username, password);
+
+      if (redirectUrl) {
         showStatusMessage("¡Inicio de sesión exitoso!", "success");
 
         // Guardar el usuario en LocalStorage
-        localStorage.setItem('loggedInUser', key);
+        localStorage.setItem('loggedInUser', `${username};${password}`);
 
         // Redirigir a la página correspondiente después de 2 segundos
         setTimeout(function() {
-          window.location.href = credentials[key]; // Redirigir a la página correspondiente
+          window.location.href = redirectUrl; // Redirigir a la URL del usuario
         }, 2000); // Esperar 2 segundos para mostrar el mensaje
       } else {
         showStatusMessage("Credenciales incorrectas, por favor intente de nuevo.", "error");
       }
     });
+
+    // Cargar las credenciales al inicio
+    loadCredentials();
 
     // Llamar a la función para comprobar si ya hay una sesión activa
     checkLoginStatus();
