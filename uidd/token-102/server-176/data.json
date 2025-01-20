@@ -1,21 +1,27 @@
 {
   "events": [
     {
-      "name": "Inicio De Clases!!",
-      "description": "Comienzan las clases y se asignan los integrantes de las secciones",
-      "time": "ERROR_404"
+      "name": "Evento de Ejemplo",
+      "description": "Descripción del evento en vivo",
+      "time": "12:00 PM",
+      "startTime": "2025-01-20T12:00:00",  // Hora de inicio en formato ISO
+      "endTime": "2025-01-20T14:00:00",    // Hora de fin en formato ISO
+      "isLive": false                       // Bandera que indica si el evento está en vivo
+    },
+    {
+      "name": "Evento Otro",
+      "description": "Descripción de otro evento",
+      "time": "15:00 PM",
+      "startTime": "2025-01-20T15:00:00",
+      "endTime": "2025-01-20T16:00:00",
+      "isLive": false
     }
   ],
   "news": [
     {
-      "title": "Cambio De Horario",
-      "description": "Habra un cambion de horario el ____",
-      "time": "Day, Month"
-    },
-    {
-      "title": "Example",
-      "description": "Test App",
-      "time": "Day, Month"
+      "title": "Noticia Importante",
+      "description": "Detalles de la noticia",
+      "time": "12:00 PM"
     }
   ]
 }
