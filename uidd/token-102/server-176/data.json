@@ -4,9 +4,9 @@
       "name": "Evento de Ejemplo",
       "description": "Descripción del evento en vivo",
       "time": "12:00 PM",
-      "startTime": "2025-01-20T12:00:00",  // Hora de inicio en formato ISO
-      "endTime": "2025-01-20T14:00:00",    // Hora de fin en formato ISO
-      "isLive": false                       // Bandera que indica si el evento está en vivo
+      "startTime": "2025-01-20T12:00:00",  
+      "endTime": "2025-01-20T14:00:00",  
+      "isLive": false                       
     },
     {
       "name": "Evento Otro",
