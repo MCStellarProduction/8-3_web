@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" href="icon.jpg" type="image/jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Inicio • NoName</title>
+  <title>Inicio • Luis Aguilar</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
@@ -235,27 +235,29 @@
       100% { opacity: 1; }
     }
 
-    /* Estilo para la señal de "En Vivo" */
-    .live-indicator {
-      color: red;
-      font-weight: 600;
-      background-color: rgba(255, 0, 0, 0.2);
-      padding: 5px 10px;
-      border-radius: 20px;
-      margin-bottom: 10px;
-      text-align: center;
-      font-size: 1rem;
-    }
-
-    .live-event {
-      border: 2px solid red;  /* Borde rojo cuando el evento está en vivo */
-      background-color: rgba(255, 0, 0, 0.1);  /* Fondo suave en rojo */
-    }
-
-    /* Mejorar visibilidad en móviles */
     @media (max-width: 768px) {
-      .live-indicator {
-        font-size: 0.9rem;
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5vw;
+      }
+
+      .content-section {
+        padding: 2vw;
+      }
+
+      #menu {
+        margin-top: 100px;
+        padding: 2vw;
+      }
+
+      .profile img {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .profile .username {
+        font-size: 1rem;
       }
     }
 
@@ -287,8 +289,8 @@
     </div>
 
     <div class="profile">
-      <span class="username">NoName</span>
-      <img src="img/111000.jpg" alt="Foto de Perfil">
+      <span class="username">Luis Aguilar</span>
+      <img src="img/000.jpg" alt="Foto de Perfil">
     </div>
   </div>
 
@@ -309,6 +311,7 @@
     <div class="noticia-box">
       <h2>Buzon</h2>
       <div class="no-event">Tu Buzon de Mensajes...</div>
+      <div id="noticia-container"></div>
     </div>
   </div>
 
@@ -373,36 +376,18 @@
 
     function loadEvents(events) {
       const eventsContainer = document.getElementById('events-container');
-      const currentTime = new Date();  // Hora actual
-      eventsContainer.innerHTML = '';  // Limpiar el contenedor antes de llenarlo
-
       if (events.length > 0) {
         events.forEach(event => {
-          const eventStart = new Date(event.startTime);
-          const eventEnd = new Date(event.endTime);
-
-          // Verificar si el evento está en vivo
-          const isEventLive = currentTime >= eventStart && currentTime <= eventEnd;
           const eventCard = document.createElement('div');
           eventCard.classList.add('event-card');
-          
-          // Agregar la señal "En Vivo" si el evento está en vivo
-          const liveIndicator = isEventLive ? `<div class="live-indicator">En Vivo</div>` : '';
-
           eventCard.innerHTML = `
-            ${liveIndicator}
+            <div class="dot"></div>
             <div class="event-details">
               <h4>${event.name}</h4>
               <p>${event.description}</p>
               <p class="time">${event.time}</p>
             </div>
           `;
-
-          // Aplicar estilo adicional si el evento está en vivo
-          if (isEventLive) {
-            eventCard.classList.add('live-event');
-          }
-
           eventsContainer.appendChild(eventCard);
         });
       } else {
