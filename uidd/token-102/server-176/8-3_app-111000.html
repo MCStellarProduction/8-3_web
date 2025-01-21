@@ -4,44 +4,10 @@
   <meta charset="UTF-8">
   <link rel="icon" href="icon.jpg" type="image/jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Inicio • Luis Aguila</title>
+  <title>Inicio • Luis Aguilar</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    /* Estilos generales */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      transition: all 0.3s ease;
-    }
-
-    /* Barra de error */
-    .error-bar {
-      display: none;
-      background-color: #e74c3c;
-      color: white;
-      width: 100%;
-      padding: 10px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .error-bar i {
-      font-size: 1.4rem;
-    }
-
     /* Estilos para la pantalla de carga */
     .loader {
       display: block;
@@ -78,6 +44,19 @@
         right: 0;
         left: unset;
       }
+    }
+
+    /* Establecer el diseño general de la página */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      transition: all 0.3s ease;
     }
 
     /* Barra de navegación */
@@ -187,6 +166,59 @@
       text-transform: uppercase;
     }
 
+    .event-box, .noticia-box {
+      width: 100%;
+      height: auto;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .event-card, .noticia-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      background-color: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .event-card .event-details, .noticia-card .noticia-details {
+      text-align: left;
+      padding-left: 1vw;
+      width: 100%;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+
+    .event-card .event-details h4, .noticia-card .noticia-details h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+
+    .event-card .event-details p, .noticia-card .noticia-details p {
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 20px;
+      word-wrap: break-word;
+    }
+
+    .event-card .event-details .time, .noticia-card .noticia-details .time {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
     /* Bloquear desplazamiento horizontal */
     body.menu-active {
       overflow-x: hidden;
@@ -246,12 +278,6 @@
 </head>
 <body>
 
-  <!-- Barra de error -->
-  <div id="error-bar" class="error-bar">
-    <i class="fas fa-exclamation-circle"></i>
-    <span id="error-message">No se puede conectar a internet o hubo un error con el código.</span>
-  </div>
-
   <!-- Pantalla de carga -->
   <div class="loader"></div>
 
@@ -286,8 +312,14 @@
       <h2>Buzon</h2>
       <div class="no-event">Tu Buzon de Mensajes...</div>
       <div id="noticia-container"></div>
+    <div class="dot"></div>
+            <div class="event-details">
+              <h4>Nobody</h4>
+              <p>...</p>
+            </div>
     </div>
   </div>
+</div>
 
   <div id="informacion" class="content-section">
     <h1 class="section-title">Información de Clase</h1>
@@ -332,25 +364,15 @@
     };
 
     function loadData() {
-      // Agregar un timestamp a la URL para evitar caché
-      const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
-      const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
-      const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
-
-      fetch(urlWithTimestamp)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Error al cargar datos');
-          }
-          return response.json();
-        })
+      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
+      fetch('https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json')
+        .then(response => response.json())
         .then(data => {
           loadEvents(data.events);
           loadNoticias(data.news);
         })
         .catch(error => {
           console.error('Error al cargar el archivo JSON:', error);
-          document.getElementById('error-bar').style.display = 'flex';
         });
     }
 
@@ -374,6 +396,24 @@
         document.getElementById('no-event').style.display = 'block';
       }
     }
+
+    function loadData() {
+  // Agregar un timestamp a la URL para evitar caché
+  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
+  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
+
+  fetch(urlWithTimestamp)
+    .then(response => response.json())
+    .then(data => {
+      loadEvents(data.events);
+      loadNoticias(data.news);
+    })
+    .catch(error => {
+      console.error('Error al cargar el archivo JSON:', error);
+    });
+}
+
 
     function loadNoticias(news) {
       const noticiaContainer = document.getElementById('noticia-container');
