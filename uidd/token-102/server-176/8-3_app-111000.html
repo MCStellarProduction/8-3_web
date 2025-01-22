@@ -371,103 +371,90 @@
   </div>
 
   <script>
-    funon showSection(sectionId) {
-      const sections = document.querySelectorAll('.content-section');
-      sections.forEach(section => {
-        section.style.display = 'none';
-      });
-
-      const sectionToShow = document.getElementById(sectionId);
-      if (sectionToShow) {
-        sectionToShow.style.display = 'block';
-      }
-    }
-
-    window.onload = function() {
-      // Ocultar el loader una vez que la página esté completamente cargada
-      const loader = document.querySelector('.loader');
-      loader.style.display = 'none';
-
-      // Mostrar la sección del menú por defecto
-      showSection('menu');
-
-      // Cargar eventos y noticias
-      loadData();
-    };
-
-    function loadData() {
-      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
-      fetch('https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json')
-        .then(response => response.json())
-        .then(data => {
-          loadEvents(data.events);
-          loadNoticias(data.news);
-        })
-        .catch(error => {
-          console.error('Error al cargar el archivo JSON:', error);
-        });
-    }
-
-    function loadEvents(events) {
-      const eventsContainer = document.getElementById('events-container');
-      if (events.length > 0) {
-        events.forEach(event => {
-          const eventCard = document.createElement('div');
-          eventCard.classList.add('event-card');
-          eventCard.innerHTML = `
-            <div class="dot"></div>
-            <div class="event-details">
-              <h4>${event.name}</h4>
-              <p>${event.description}</p>
-              <p class="time">${event.time}</p>
-            </div>
-          `;
-          eventsContainer.appendChild(eventCard);
-        });
-      } else {
-        document.getElementById('no-event').style.display = 'block';
-      }
-    }
-
-    function loadData() {
-  // Agregar un timestamp a la URL para evitar caché
-  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
-  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
-  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
-
-  fetch(urlWithTimestamp)
-    .then(response => response.json())
-    .then(data => {
-      loadEvents(data.events);
-      loadNoticias(data.news);
-    })
-    .catch(error => {
-      console.error('Error al cargar el archivo JSON:', error);
+  function showSection(sectionId) {
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => {
+      section.style.display = 'none';
     });
-}
 
-
-    function loadNoticias(news) {
-      const noticiaContainer = document.getElementById('noticia-container');
-      if (news.length > 0) {
-        news.forEach(noticia => {
-          const noticiaCard = document.createElement('div');
-          noticiaCard.classList.add('noticia-card');
-          noticiaCard.innerHTML = `
-            <div class="dot"></div>
-            <div class="noticia-details">
-              <h4>${noticia.title}</h4>
-              <p>${noticia.description}</p>
-              <p class="time">${noticia.time}</p>
-            </div>
-          `;
-          noticiaContainer.appendChild(noticiaCard);
-        });
-      } else {
-        document.getElementById('no-noticia').style.display = 'block';
-      }
+    const sectionToShow = document.getElementById(sectionId);
+    if (sectionToShow) {
+      sectionToShow.style.display = 'block';
     }
-  </script>
+  }
+
+  window.onload = function() {
+    // Ocultar el loader una vez que la página esté completamente cargada
+    const loader = document.querySelector('.loader');
+    loader.style.display = 'none';
+
+    // Mostrar la sección del menú por defecto
+    showSection('menu');
+
+    // Cargar eventos y noticias
+    loadData();
+  };
+
+  function loadData() {
+    // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
+    const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+    const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
+    const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
+
+    fetch(urlWithTimestamp)
+      .then(response => response.json())
+      .then(data => {
+        loadEvents(data.events);
+        loadNoticias(data.news);
+      })
+      .catch(error => {
+        console.error('Error al cargar el archivo JSON:', error);
+      });
+  }
+
+  function loadEvents(events) {
+    const eventsContainer = document.getElementById('events-container');
+    if (events.length > 0) {
+      events.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('event-card');
+        eventCard.innerHTML = `
+          <div class="dot"></div>
+          <div class="event-details">
+            <h4>${event.name}</h4>
+            <p>${event.description}</p>
+            <p class="time">${event.time}</p>
+          </div>
+        `;
+        eventsContainer.appendChild(eventCard);
+      });
+    } else {
+      document.getElementById('no-event').style.display = 'block';
+    }
+  }
+
+  function loadNoticias(news) {
+    const noticiaContainer = document.getElementById('noticia-container');
+    if (news.length > 0) {
+      news.forEach(noticia => {
+        const noticiaCard = document.createElement('div');
+        noticiaCard.classList.add('noticia-card');
+        noticiaCard.innerHTML = `
+          <div class="dot"></div>
+          <div class="noticia-details">
+            <h4>${noticia.title}</h4>
+            <p>${noticia.description}</p>
+            <p class="time">${noticia.time}</p>
+          </div>
+        `;
+        noticiaContainer.appendChild(noticiaCard);
+      });
+    } else {
+      document.getElementById('no-noticia').style.display = 'block';
+    }
+  }
+</script>
+
 
 </body>
 </html>
