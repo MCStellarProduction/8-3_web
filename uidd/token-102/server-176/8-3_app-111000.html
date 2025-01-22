@@ -371,16 +371,17 @@
 
   <script>
   function showSection(sectionId) {
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(section => {
-      section.style.display = 'none';
-    });
+  const sections = document.querySelectorAll('.content-section');
+  sections.forEach(section => {
+    section.style.display = 'none';
+  });
 
-    const sectionToShow = document.getElementById(sectionId);
-    if (sectionToShow) {
-      sectionToShow.style.display = 'block';
-    }
+  const sectionToShow = document.getElementById(sectionId);
+  if (sectionToShow) {
+    sectionToShow.style.display = 'block';  // Mostrar la sección seleccionada
   }
+}
+
 
   window.onload = function() {
     // Ocultar el loader una vez que la página esté completamente cargada
