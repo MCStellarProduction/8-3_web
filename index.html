@@ -179,18 +179,10 @@
   </div>
 
   <script>
-    // Cargar el archivo JSON con las credenciales
-    let credentials = {};
-
-    // Función para cargar las credenciales desde un archivo JSON
-    function loadCredentials() {
-      fetch('credentials.json')
-        .then(response => response.json())
-        .then(data => {
-          credentials = data; // Asignar las credenciales cargadas
-        })
-        .catch(error => console.error('Error al cargar las credenciales:', error));
-    }
+    const credentials = {
+      "LuisAguilar;luis201030": "https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/8-3_app-000",
+      "TestAccount456;acd56": "https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/8-3_app-222000",
+    };
 
     // Mostrar mensaje de estado
     function showStatusMessage(message, type) {
@@ -242,9 +234,6 @@
         showStatusMessage("Credenciales incorrectas, por favor intente de nuevo.", "error");
       }
     });
-
-    // Cargar las credenciales al inicio
-    loadCredentials();
   </script>
 
 </body>
