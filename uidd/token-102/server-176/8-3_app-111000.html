@@ -473,8 +473,10 @@
   const sectionToShow = document.getElementById(sectionId);
   if (sectionToShow) {
     sectionToShow.style.display = 'block';  // Mostrar la sección seleccionada
+    sectionToShow.style.opacity = '1';  // Asegurarnos de que la opacidad se mantenga
   }
 }
+
 
 
   window.onload = function() {
