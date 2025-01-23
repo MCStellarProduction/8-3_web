@@ -9,9 +9,9 @@
       "isLive": true                      
     },
     {
-      "name": "Evento Otro",
+      "name": "Test Event",
       "description": "Descripción de otro evento",
-      "time": "15:00 PM",
+      "time": "??:?? ??",
       "startTime": "2025-01-20T15:00:00",
       "endTime": "2025-01-20T16:00:00",
       "isLive": true
@@ -19,9 +19,9 @@
   ],
   "news": [
     {
-      "title": "Noticia Importante",
-      "description": "Detalles de la noticia",
-      "time": "12:00 PM"
+      "title": "Noticias Deshabilitadas",
+      "description": "Las noticias estan deshabilitadas hasta nuevo aviso.",
+      "time": "No disponible"
     }
   ]
 }
