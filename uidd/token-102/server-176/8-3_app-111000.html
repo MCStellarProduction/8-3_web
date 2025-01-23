@@ -478,16 +478,20 @@
 
 
   window.onload = function() {
-    // Ocultar el loader una vez que la página esté completamente cargada
-    const loader = document.querySelector('.loader');
-    loader.style.display = 'none';
+  // Ocultar el loader una vez que la página esté completamente cargada
+  const loader = document.querySelector('.loader');
+  loader.style.display = 'none';
 
-    // Mostrar la sección del menú por defecto
-    showSection('menu');
+  // Mostrar la sección del menú por defecto
+  showSection('menu');
+  
+  // Mostrar la sección de horario automáticamente
+  showSection('horario');
 
-    // Cargar eventos y noticias
-    loadData();
-  };
+  // Cargar eventos y noticias
+  loadData();
+};
+
 
   function loadData() {
     // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
