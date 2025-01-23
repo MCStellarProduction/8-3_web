@@ -208,15 +208,6 @@
       return credentials[key];
     }
 
-    // Verifica si ya hay una sesión iniciada
-    function checkLoginStatus() {
-      const loggedInUser = localStorage.getItem('loggedInUser');
-      if (loggedInUser) {
-        // Redirigir automáticamente si hay un usuario guardado en LocalStorage
-        window.location.href = credentials[loggedInUser];
-      }
-    }
-
     // Evento para el botón de iniciar sesión
     document.getElementById('submit-btn').addEventListener('click', function() {
       var username = document.getElementById('username').value;
@@ -248,9 +239,6 @@
 
     // Cargar las credenciales al inicio
     loadCredentials();
-
-    // Llamar a la función para comprobar si ya hay una sesión activa
-    checkLoginStatus();
   </script>
 
 </body>
