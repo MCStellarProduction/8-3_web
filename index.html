@@ -31,10 +31,10 @@
 
     /* Contenedor de login */
     .login-container {
-      background-color: white;
+      background-color: transparent;
       padding: 40px;
+      border-color: white;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 400px;
       text-align: center;
@@ -75,9 +75,9 @@
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border: 2px solid #ddd;
-      border-radius: 10px;
       font-size: 16px;
+      border-radius: 5px;
+      background-color: transparent;
       transition: all 0.3s ease;
       box-sizing: border-box;
       opacity: 1;
@@ -88,7 +88,6 @@
     .input-field:focus {
       border-color: #ffd54d;
       outline: none;
-      box-shadow: 0 0 5px rgba(91, 189, 91, 0.5);
     }
 
     .input-field::placeholder {
@@ -165,7 +164,7 @@
 
   <div class="login-container">
     <h1>Bienvenido</h1>
-    <p>Inicia sesión en la Cuenta de la 8-3</p>
+    <p>Entra con tu cuenta de estudiante 8-3.</p>
     <input class="input-field" type="text" id="username" placeholder="Usuario" required>
     <input class="input-field" type="password" id="password" placeholder="Contraseña" required>
     <button class="submit-btn" id="submit-btn">Ingresar</button>
