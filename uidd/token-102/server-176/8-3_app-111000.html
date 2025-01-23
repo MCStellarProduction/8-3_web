@@ -253,6 +253,48 @@
       animation: fadeIn 0.6s forwards;
     }
 
+    .horario-container {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.horario-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.horario-table th, .horario-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.horario-table th {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.horario-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.horario-table tr:hover {
+  background-color: #f1c40f;
+  cursor: pointer;
+}
+
+.horario-table td {
+  font-size: 1rem;
+  color: #333;
+}
+
+.horario-table th {
+  font-size: 1.2rem;
+}
+
+
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
@@ -365,10 +407,51 @@
     <h5>- </h5>
 
   <div id="calendario" class="content-section">
-    <h1 class="section-title">Calendario</h1>
-    <p>Aquí va el contenido del Calendario.</p>
-    <img src="">
-  </div>
+    <h1 class="section-title">Horario</h1>
+    <p>Aquí está el horario de clases actualizado:</p>
+    <div class="horario-container">
+        <table class="horario-table">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Hora</th>
+                    <th>Asignatura</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunes</td>
+                    <td>8:00 - 9:30</td>
+                    <td>Matemáticas</td>
+                </tr>
+                <tr>
+                    <td>Martes</td>
+                    <td>9:30 - 11:00</td>
+                    <td>Ciencias</td>
+                </tr>
+                <tr>
+                    <td>Miércoles</td>
+                    <td>8:00 - 9:30</td>
+                    <td>Historia</td>
+                </tr>
+                <tr>
+                    <td>Jueves</td>
+                    <td>9:30 - 11:00</td>
+                    <td>Lengua y Literatura</td>
+                </tr>
+                <tr>
+                    <td>Viernes</td>
+                    <td>8:00 - 9:30</td>
+                    <td>Inglés</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <h3>Imagen Representativa del Horario</h3>
+    <img src="ruta/de/tu/imagen.jpg" alt="Imagen Horario" style="width: 100%; height: auto; border-radius: 10px;">
+</div>
+
 
   <script>
   function showSection(sectionId) {
