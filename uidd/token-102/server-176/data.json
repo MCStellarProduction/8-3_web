@@ -7,14 +7,6 @@
       "startTime": "2025-01-20T11:50:35",  
       "endTime": "2025-01-20T14:50:35",  
       "isLive": true                      
-    },
-    {
-      "name": "Test Event",
-      "description": "Descripción de otro evento",
-      "time": "??:?? ??",
-      "startTime": "2025-01-20T15:00:00",
-      "endTime": "2025-01-20T16:00:00",
-      "isLive": true
     }
   ],
   "news": [
