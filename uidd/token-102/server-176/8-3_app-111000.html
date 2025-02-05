@@ -5,11 +5,10 @@
   <link rel="icon" href="icon.jpg" type="image/jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Inicio • TestUser</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=homelightbulbcalendar_clockaccount_circleevent_upcomingreceipt_longmailpersondeployed_code_accounthotel_classschool" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    /* Estilos para la pantalla de carga */
     .loader {
       display: block;
       --height-of-loader: 4px;
@@ -47,12 +46,11 @@
       }
     }
 
-    /* Establecer el diseño general de la página */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #9b59b6, #f1c40f); /* Gradiente de morado a amarillo */
+      background: linear-gradient(to bottom right, #9b59b6, #f1c40f);
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -60,7 +58,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Barra de navegación */
     .navbar {
       background: linear-gradient(to bottom right, #9b59b6, #f1c40f);
       padding: 10px 20px;
@@ -112,7 +109,7 @@
       max-width: 150px;
     }
 
-    .porfile .username span {
+    .profile .username span {
       font-size: 1.6rem;
       color: white;
     }
@@ -130,7 +127,6 @@
       transform: scale(1.1);
     }
 
-    /* Secciones del contenido */
     .content-section {
       display: none;
       padding: 5vw;
@@ -236,12 +232,10 @@
       color: #777;
     }
 
-    /* Bloquear desplazamiento horizontal */
     body.menu-active {
       overflow-x: hidden;
     }
 
-    /* Animación suave */
     .content-section {
       opacity: 0;
       animation: fadeIn 0.6s forwards;
@@ -295,7 +289,6 @@
 </head>
 <body>
 
-  <!-- Pantalla de carga -->
   <div class="loader"></div>
 
   <div class="navbar">
@@ -329,14 +322,13 @@
       <span class="material-symbols-outlined">mail</span> <h2>Buzon</h2>
       <div class="no-event">Mensajes de otros compañeros:</div>
       <div id="noticia-container"></div>
-    <div class="dot"></div>
-            <div class="event-details">
-              <span class="material-symbols-outlined">person</span> <h4>System</h4>
-              <p>Nadie te a dejado un mensaje...</p>
-            </div>
+      <div class="dot"></div>
+      <div class="event-details">
+        <span class="material-symbols-outlined">person</span> <h4>System</h4>
+        <p>Nadie te a dejado un mensaje...</p>
+      </div>
     </div>
   </div>
-</div>
 
   <div id="informacion" class="content-section">
     <h1 class="section-title">Información de Clase</h1>
@@ -372,20 +364,18 @@
     }
 
     window.onload = function() {
-      // Ocultar el loader una vez que la página esté completamente cargada
       const loader = document.querySelector('.loader');
       loader.style.display = 'none';
-
-      // Mostrar la sección del menú por defecto
       showSection('menu');
-
-      // Cargar eventos y noticias
       loadData();
     };
 
     function loadData() {
-      // Aquí debes poner la URL correcta del archivo JSON en tu repositorio de GitHub Pages
-      fetch('https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json')
+      const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+      const timestamp = new Date().getTime();
+      const urlWithTimestamp = `${url}?t=${timestamp}`;
+
+      fetch(urlWithTimestamp)
         .then(response => response.json())
         .then(data => {
           loadEvents(data.events);
@@ -416,24 +406,6 @@
         document.getElementById('no-event').style.display = 'block';
       }
     }
-
-    function loadData() {
-  // Agregar un timestamp a la URL para evitar caché
-  const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
-  const timestamp = new Date().getTime(); // Obtenemos el tiempo actual en milisegundos
-  const urlWithTimestamp = `${url}?t=${timestamp}`; // Añadimos el timestamp a la URL
-
-  fetch(urlWithTimestamp)
-    .then(response => response.json())
-    .then(data => {
-      loadEvents(data.events);
-      loadNoticias(data.news);
-    })
-    .catch(error => {
-      console.error('Error al cargar el archivo JSON:', error);
-    });
-}
-
 
     function loadNoticias(news) {
       const noticiaContainer = document.getElementById('noticia-container');
