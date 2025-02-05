@@ -2,8 +2,8 @@
   "events": [
     {
       "name": "Primer Dia de Clases",
-      "description": "Aqui se vera las secciones de cada persona.",
-      "time": "12:00 PM",
+      "description": "Donde empieza el aprendizaje!!",
+      "time": "7:00 AM, Lunes 10",
       "startTime": "2025-01-20T11:50:35",  
       "endTime": "2025-01-20T14:50:35",  
       "isLive": true                      
