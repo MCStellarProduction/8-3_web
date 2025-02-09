@@ -182,6 +182,7 @@
     }
 
     .event-box, .noticia-box {
+      display: block;
       width: 100%;
       height: auto;
       background-color: #ffffff;
@@ -368,10 +369,13 @@
 
     window.onload = function() {
       const loader = document.querySelector('.loader');
+      const box = document.querySelector('.event-box, .noticia-box');
+      box.style.display = 'none';
       loader.style.display = 'block';
 
       setTimeout(() => {
-        loader.style.display = 'none';   
+        loader.style.display = 'none';  
+        box.style.display = 'block';
         loadData();
         showSection('menu');
       }, 6000);
