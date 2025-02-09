@@ -84,6 +84,7 @@
     }
 
     .navbar .nav-icons span {
+      display: block;
       font-size: 1.6rem;
       color: white;
       cursor: pointer;
@@ -386,13 +387,16 @@
       const eventbox = document.querySelector('.event-box');
       const noticebox = document.querySelector('.noticia-box');
       const eventdetails = document.querySelector('.event-details');
+      const navicons = document.querySelector('.nav-icons span');
       eventdetails.style.display = 'none';
+      navicons.style.display = 'none';
       eventbox.style.display = 'none';
       noticebox.style.display = 'none';
       loader.style.display = 'block';
 
       setTimeout(() => {
         loader.style.display = 'none';  
+        navicons.style.display = 'block';
         eventdetails.style.display = 'block';
         eventbox.style.display = 'block';
         noticebox.style.display = 'block';
