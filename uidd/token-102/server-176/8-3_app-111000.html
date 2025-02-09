@@ -222,6 +222,7 @@
     }
 
     .event-card .event-details, .noticia-card .noticia-details {
+      display: block;
       text-align: left;
       padding-left: 1vw;
       width: 100%;
@@ -384,12 +385,15 @@
       const loader = document.querySelector('.loader');
       const eventbox = document.querySelector('.event-box');
       const noticebox = document.querySelector('.noticia-box');
+      const eventdetails = document.querySelector('.event-details');
+      eventdetails.style.display = 'none';
       eventbox.style.display = 'none';
       noticebox.style.display = 'none';
       loader.style.display = 'block';
 
       setTimeout(() => {
         loader.style.display = 'none';  
+        eventdetails.style.display = 'block';
         eventbox.style.display = 'block';
         noticebox.style.display = 'block';
         loadData();
