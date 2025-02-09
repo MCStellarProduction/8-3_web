@@ -369,6 +369,12 @@
       showSection('menu');
       loadData();
     };
+    
+    setTimeout(() => {
+      loader.style.display = 'none';  
+      showSection('menu');            
+      loadData();                     
+    }, 1700);
 
     function loadData() {
       const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
