@@ -369,13 +369,16 @@
 
     window.onload = function() {
       const loader = document.querySelector('.loader');
-      const box = document.querySelector('.event-box, .noticia-box');
-      box.style.display = 'none';
+      const event_box = document.querySelector('.event-box');
+      const event_box = document.querySelector('.noticia-box');
+      event_box.style.display = 'none';
+      notice_box.style.display = 'none';
       loader.style.display = 'block';
 
       setTimeout(() => {
         loader.style.display = 'none';  
-        box.style.display = 'block';
+        event_box.style.display = 'block';
+        notice_box.style.display = 'block';
         loadData();
         showSection('menu');
       }, 6000);
