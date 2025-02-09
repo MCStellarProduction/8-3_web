@@ -365,17 +365,13 @@
 
     window.onload = function() {
       const loader = document.querySelector('.loader');
-      loader.style.display = 'none';
-      showSection('menu');
+      loader.style.display = 'block';
+      showSection('menu'); 
       loadData();
-    
-    
-      setTimeout(() => {
-        loader.style.display = 'none';  
-        showSection('menu');            
-        loadData();                     
-      }, 5000);
-     };
+      setTimeout(() => {        
+        loader.style.display = 'none';
+      }, 5000); 
+    };
 
     function loadData() {
       const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
