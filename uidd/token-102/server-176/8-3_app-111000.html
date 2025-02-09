@@ -8,11 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>  
+  <style>
     .loader {
       display: block;
       --height-of-loader: 4px;
-      --loader-color: #9b59b6;
+      --loader-color: #0071e2;
       width: 130px;
       height: var(--height-of-loader);
       border-radius: 30px;
@@ -46,18 +46,6 @@
         right: 0;
         left: unset;
       }
-    }
-
-    .loader-background {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      translate: -50% -50%;
-      width: 99999px;
-      height: 99999px;
-      background-color: white;
-      z-index: 9998;
-      display: none;
     }
 
     body {
@@ -313,8 +301,8 @@
     </div>
 
     <div class="profile">
-      <span class="material-symbols-outlined">account_circle</span> <h4 class="username">Account</h4>
-      <img src="img/222000.jpg" alt="Foto de Perfil">
+      <span class="material-symbols-outlined">account_circle</span> <h4 class="username">NoName</h4>
+      <img src="img/111000.jpg" alt="Foto de Perfil">
     </div>
   </div>
 
@@ -352,16 +340,17 @@
     <span class="material-symbols-outlined">hotel_class</span> <h3>Sección</h3>
     <p>8-3</p>
     <span class="material-symbols-outlined">school</span> <h3>Profesor Guía</h3>
-    <p>No Definido</p>
+    <p>Prof. Cesar Cambronero Vega</p>
     <span class="material-symbols-outlined">school</span> <h3>Orientadora</h3>
-    <p>No Definido</p>
+    <p>Lilliana Del Carmen Carballo Araya</p>
     <span class="material-symbols-outlined">school</span> <h3>Auxiliar</h3>
-    <p>No definido</p>
+    <p>Adriana Campos</p>
   </div>
 
   <div id="calendario" class="content-section">
     <h1 class="section-title">Horario</h1>
     <p>Aqui se encuentra el horario de clase</p>
+    <img src="horario.jpg" height="333" width="250">
   </div>
 
   <script>
@@ -378,23 +367,16 @@
     }
 
     window.onload = function() {
-      showLoader();
-      showSection('menu');
-      loadData();
-    };
-
-    function showLoader() {
       const loader = document.querySelector('.loader');
-      const loaderBackground = document.querySelector('.loader-background');
       loader.style.display = 'block';
-      loaderBackground.style.display = 'block';
+      showSection('menu');
 
       setTimeout(() => {
-        loader.style.display = 'none';
-        loaderBackground.style.display = 'none';
-      }, 4000);
-    }
-
+        loader.style.display = 'none';   
+        loadData();
+        showSection('menu');
+      }, 6000);
+    };
 
     function loadData() {
       const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
