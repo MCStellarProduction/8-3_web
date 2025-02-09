@@ -382,16 +382,16 @@
 
     window.onload = function() {
       const loader = document.querySelector('.loader');
-      const event_box = document.querySelector('.event-box');
-      const event_box = document.querySelector('.noticia-box');
-      event_box.style.display = 'none';
-      notice_box.style.display = 'none';
+      const eventbox = document.querySelector('.event-box');
+      const noticebox = document.querySelector('.noticia-box');
+      eventbox.style.display = 'none';
+      noticebox.style.display = 'none';
       loader.style.display = 'block';
 
       setTimeout(() => {
         loader.style.display = 'none';  
-        event_box.style.display = 'block';
-        notice_box.style.display = 'block';
+        eventbox.style.display = 'block';
+        noticebox.style.display = 'block';
         loadData();
         showSection('menu');
       }, 6000);
