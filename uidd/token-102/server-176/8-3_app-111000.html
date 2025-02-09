@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
+  <style>  
     .loader {
       display: block;
       --height-of-loader: 4px;
@@ -42,10 +42,21 @@
         width: 100%;
       }
       100% {
-        width: 100%;
+        width: 0;
         right: 0;
         left: unset;
       }
+    }
+
+    .loader-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: white;
+      z-index: 9998;
+      display: none;
     }
 
     body {
@@ -373,13 +384,15 @@
 
     function showLoader() {
       const loader = document.querySelector('.loader');
+      const loaderBackground = document.querySelector('.loader-background');
       loader.style.display = 'block';
+      loaderBackground.style.display = 'block';
 
       setTimeout(() => {
         loader.style.display = 'none';
-      }, 4000); 
+        loaderBackground.style.display = 'none';
+      }, 4000);
     }
-
 
 
     function loadData() {
