@@ -366,12 +366,14 @@
     window.onload = function() {
       const loader = document.querySelector('.loader');
       loader.style.display = 'block';
-      showSection('menu'); 
-      loadData();
-      setTimeout(() => {        
+
+      setTimeout(() => {
         loader.style.display = 'none';
-      }, 10000); 
+        showSection('menu');
+        loadData();
+      }, 10000);
     };
+
 
     function loadData() {
       const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
