@@ -40,7 +40,7 @@
         width: 100%;
       }
       100% {
-        width: 0;
+        width: 100%;
         right: 0;
         left: unset;
       }
@@ -365,7 +365,6 @@
 
     window.onload = function() {
       showLoader();
-      showSection('menu');
       loadData();
     };
 
@@ -375,6 +374,7 @@
 
       setTimeout(() => {
         loader.style.display = 'none';
+        showSection('menu');
       }, 4000); 
     }
 
