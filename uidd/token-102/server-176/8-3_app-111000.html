@@ -12,7 +12,7 @@
     .loader {
       display: block;
       --height-of-loader: 4px;
-      --loader-color: #0071e2;
+      --loader-color: #9b59b6;
       width: 130px;
       height: var(--height-of-loader);
       border-radius: 30px;
@@ -364,15 +364,19 @@
     }
 
     window.onload = function() {
-      const loader = document.querySelector('.loader');
-      loader.style.display = 'block';
+      showLoader();
       showSection('menu');
       loadData();
+    };
+
+    function showLoader() {
+      const loader = document.querySelector('.loader');
+      loader.style.display = 'block';
 
       setTimeout(() => {
-        loader.style.display = 'none';                   
-      }, 10000);
-    };
+        loader.style.display = 'none';
+      }, 4000); 
+    }
 
 
 
