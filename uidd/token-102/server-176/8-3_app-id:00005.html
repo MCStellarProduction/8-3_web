@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="home.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Inicio • Jossepp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    .loader {
+      display: block;
+      --height-of-loader: 4px;
+      --loader-color: linear-gradient(to right, #9b59b6, #f1c40f);
+      width: 130px;
+      height: var(--height-of-loader);
+      border-radius: 30px;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+
+    .loader::before {
+      content: "";
+      position: absolute;
+      background: var(--loader-color);
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      border-radius: 30px;
+      animation: moving 1s ease-in-out infinite;
+      z-index: 9999;
+    }
+
+    @keyframes moving {
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+        right: 0;
+        left: unset;
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #fff, #fff);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    .navbar {
+      background: linear-gradient(to bottom right, #9b59b6, #f1c40f);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-sizing: border-box;
+      border-bottom: 3px solid #e8b71a;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar .nav-icons span {
+      font-size: 1.6rem;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar .nav-icons span:hover {
+      transform: scale(1.2);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      overflow: hidden;
+    }
+
+    .profile .username h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 150px;
+    }
+
+    .profile .username span {
+      font-size: 1.6rem;
+      color: white;
+    }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      transition: all 0.3s ease;
+    }
+
+    .profile img:hover {
+      transform: scale(1.1);
+    }
+
+    .content-section {
+      display: none;
+      padding: 5vw;
+      padding: 100vh;
+      text-align: center;
+      min-height: 100vh;
+      margin-top: 5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s ease;
+    }
+
+    .content-section span {
+      font-size: 1.6rem;
+      color: black;
+    }
+
+    .content-section h3 {
+      font-size: 1rem;
+    }
+
+    #menu {
+      background-color: #f5f8fc;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      border-radius: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      margin-top: 100px;
+    }
+
+    #informacion, #calendario {
+      background-color: #f5f8fc;
+      width: 100vw;
+      height: 100vh;
+      left: 50%;
+      border-radius: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 120px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .event-box {
+      display: block;
+      width: 100%;
+      height: auto;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .noticia-box {
+      display: block;
+      width: 100%;
+      height: auto;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .event-card, .noticia-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      background-color: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .event-card .event-details, .noticia-card .noticia-details {
+      display: block;
+      text-align: left;
+      padding-left: 1vw;
+      width: 100%;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+
+    .event-card .event-details h4, .noticia-card .noticia-details h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+
+    .event-card .event-details p, .noticia-card .noticia-details p {
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 20px;
+      word-wrap: break-word;
+    }
+
+    .event-card .event-details .time, .noticia-card .noticia-details .time {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    body.menu-active {
+      overflow-x: hidden;
+    }
+
+    .content-section {
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5vw;
+      }
+
+      .content-section {
+        padding: 2vw;
+      }
+
+      #menu {
+        margin-top: 100px;
+        padding: 2vw;
+      }
+
+      .profile img {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .profile .username {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .navbar {
+        padding: 15px 40px;
+      }
+
+      .content-section {
+        padding: 2vw;
+      }
+
+      #menu {
+        padding: 2vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader"></div>
+
+  <div class="navbar">
+    <div class="nav-icons">
+      <a href="javascript:void(0)" onclick="showSection('menu')"><span class="material-symbols-outlined">home</span></a>
+      <a href="javascript:void(0)" onclick="showSection('informacion')"><span class="material-symbols-outlined">lightbulb</span></a>
+      <a href="javascript:void(0)" onclick="showSection('calendario')"><span class="material-symbols-outlined">calendar_clock</span></a>
+    </div>
+
+    <div class="profile">
+      <span class="material-symbols-outlined">account_circle</span> <h4 class="username">Jossepp</h4>
+      <img src="img/005.jpg" alt="Foto de Perfil">
+    </div>
+  </div>
+
+  <div id="menu" class="content-section">
+    <h1>Menú</h1>
+    <div class="event-box">
+      <span class="material-symbols-outlined">event_upcoming</span> <h2>Eventos</h2>
+      <div class="no-event" id="no-event">Eventos Disponibles</div>
+      <div id="events-container"></div>
+    </div>
+
+    <div class="noticia-box">
+      <span class="material-symbols-outlined">receipt_long</span> <h2>Noticias</h2>
+      <div class="no-event" id="no-noticia">Noticias Disponibles</div>
+      <div id="noticia-container"></div>
+    </div>
+
+    <div class="noticia-box">
+      <div id="noticia-card">
+        <span class="material-symbols-outlined">mail</span> <h2>Buzon</h2>
+        <div class="no-event">Mensajes de otros compañeros:</div>
+        <div class="dot"></div>
+        <div class="event-details">
+        <span class="material-symbols-outlined">person</span> <h4>System</h4>
+        <p>Nadie te a dejado un mensaje...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="informacion" class="content-section">
+    <h1 class="section-title">Información de Clase</h1>
+    <br>
+    <span class="material-symbols-outlined">deployed_code_account</span> <h3>Creador de la Página</h3>
+    <p>Luis Andrés Zamora Aguilar</p>
+    <span class="material-symbols-outlined">hotel_class</span> <h3>Sección</h3>
+    <p>8-3</p>
+    <span class="material-symbols-outlined">school</span> <h3>Profesor Guía</h3>
+    <p>Alejandra Quesada Ruiz</p>
+    <span class="material-symbols-outlined">school</span> <h3>Orientadora</h3>
+    <p>Lilliana Del Carmen Carballo Araya</p>
+    <span class="material-symbols-outlined">school</span> <h3>Auxiliar</h3>
+    <p>Adriana Campos</p>
+  </div>
+
+  <div id="calendario" class="content-section">
+    <h1 class="section-title">Horario</h1>
+    <p>Aqui se encuentra el horario de clase</p>
+    <img src="horario.png" height="333" width="250">
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      const sectionToShow = document.getElementById(sectionId);
+      if (sectionToShow) {
+        sectionToShow.style.display = 'block';
+      }
+    }
+
+    window.onload = function() {
+      const loader = document.querySelector('.loader');
+      const eventbox = document.querySelector('.event-box');
+      const noticebox = document.querySelector('.noticia-box');
+      const eventdetails = document.querySelector('.event-details');
+      const navicons = document.querySelector('.navbar');
+      eventdetails.style.display = 'none';
+      navicons.style.display = 'none';
+      eventbox.style.display = 'none';
+      noticebox.style.display = 'none';
+      loader.style.display = 'block';
+
+      setTimeout(() => {
+        loader.style.display = 'none';  
+        navicons.style.display = 'flex';
+        eventdetails.style.display = 'block';
+        eventbox.style.display = 'block';
+        noticebox.style.display = 'block';
+        loadData();
+        showSection('menu');
+      }, 6000);
+    };
+
+    function loadData() {
+      const url = 'https://mcstellarproduction.github.io/8-3_web/uidd/token-102/server-176/data.json';
+      const timestamp = new Date().getTime();
+      const urlWithTimestamp = `${url}?t=${timestamp}`;
+
+      fetch(urlWithTimestamp)
+        .then(response => response.json())
+        .then(data => {
+          loadEvents(data.events);
+          loadNoticias(data.news);
+        })
+        .catch(error => {
+          console.error('Error al cargar el archivo JSON:', error);
+        });
+    }
+
+    function loadEvents(events) {
+      const eventsContainer = document.getElementById('events-container');
+      if (events.length > 0) {
+        events.forEach(event => {
+          const eventCard = document.createElement('div');
+          eventCard.classList.add('event-card');
+          eventCard.innerHTML = `
+            <div class="dot"></div>
+            <div class="event-details">
+              <h4>${event.name}</h4>
+              <p>${event.description}</p>
+              <p class="time">${event.time}</p>
+            </div>
+          `;
+          eventsContainer.appendChild(eventCard);
+        });
+      } else {
+        document.getElementById('no-event').style.display = 'block';
+      }
+    }
+
+    function loadNoticias(news) {
+      const noticiaContainer = document.getElementById('noticia-container');
+      if (news.length > 0) {
+        news.forEach(noticia => {
+          const noticiaCard = document.createElement('div');
+          noticiaCard.classList.add('noticia-card');
+          noticiaCard.innerHTML = `
+            <div class="dot"></div>
+            <div class="noticia-details">
+              <h4>${noticia.title}</h4>
+              <p>${noticia.description}</p>
+              <p class="time">${noticia.time}</p>
+            </div>
+          `;
+          noticiaContainer.appendChild(noticiaCard);
+        });
+      } else {
+        document.getElementById('no-noticia').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
